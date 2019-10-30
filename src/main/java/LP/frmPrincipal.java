@@ -80,24 +80,19 @@ public class frmPrincipal extends JFrame {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				int control = 0;
+				
 				try
 				{
 					String query = "select * from empleados_admin where usuario=? and contraseña=? ";
 					PreparedStatement pst = con.prepareStatement(query);
 					pst.setString(1, textField_usuario.getText());
-					pst.setString(2, pfContrasena.getText());
+					pst.setString(2, pfContrasena.getText());				
 					
-					String query2 = "select * from apostante where usuario=? and contraseña=? ";
-					PreparedStatement pst2 = con.prepareStatement(query2);
-					pst2.setString(1, textField_usuario.getText());
-					pst2.setString(2, pfContrasena.getText());
-					
-					ResultSet rs = pst.executeQuery();
-					ResultSet rs2 = pst2.executeQuery();
+					ResultSet rs = pst.executeQuery();					
 					
 					int count = 0;
-					int count2 = 0;
-					
+										
 					while(rs.next())
 					{
 						count = count + 1;
@@ -111,12 +106,42 @@ public class frmPrincipal extends JFrame {
 						
 						if(base.validarAdmin(usuario, contraseña)==true)
 						{
-							System.out.println("ha entrado if Admin");
+							esconder();
+							control=1;
 							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
 							frmAdmin1 adm = new frmAdmin1();
 							adm.setVisible(true);							
-						}						
-					}
+						}
+						else if(base.validarAdmin(usuario, contraseña)==false)
+						{
+							System.out.println("nada");
+													
+						}
+					}					
+					else if(count>1)
+					{
+						JOptionPane.showMessageDialog(null, "Usuario y contraseña duplicados");
+					}					
+										
+					rs.close();
+					pst.close();					
+					
+				}
+				catch(Exception e1)
+				{
+					//JOptionPane.showMessageDialog(null, e1);				
+				}
+				
+				try 
+				{
+					String query2 = "select * from apostante where usuario=? and contraseña=? ";
+					PreparedStatement pst2 = con.prepareStatement(query2);
+					pst2.setString(1, textField_usuario.getText());
+					pst2.setString(2, pfContrasena.getText());
+					
+					ResultSet rs2 = pst2.executeQuery();
+					
+					int count2 = 0;
 					
 					while(rs2.next())
 					{
@@ -132,35 +157,32 @@ public class frmPrincipal extends JFrame {
 						
 						if(base2.validarUsuario(usuario2, contraseña2)==true)
 						{
-							System.out.println("ha entrado if Usuario");
+							esconder();
 							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
 							frmUsuario adm = new frmUsuario();
 							adm.setVisible(true);							
-						}								
+						}
+						else if(base2.validarUsuario(usuario2, contraseña2)==false)
+						{
+							System.out.println("nada");														
+						}
 					}					
-					else if(count>1)
-					{
-						JOptionPane.showMessageDialog(null, "Usuario y contraseña duplicados");
-					}
 					else if(count2>1)
 					{
 						JOptionPane.showMessageDialog(null, "Usuario y contraseña duplicados");
 					}
-					else
+					else if(control != 1)
 					{
-						JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos");
+						System.out.println("entra en 2");
+						JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectas");
 					}
-					
-					rs.close();
-					pst.close();
 					
 					rs2.close();
 					pst2.close();
-					
-				}
-				catch(Exception e1)
+				} 
+				catch (Exception e) 
 				{
-					//JOptionPane.showMessageDialog(null, e1);				
+					// TODO: handle exception
 				}
 			}
 		});				

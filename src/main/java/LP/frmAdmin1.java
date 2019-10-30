@@ -28,7 +28,7 @@ public class frmAdmin1 extends JFrame implements ActionListener{
 		
 		setTitle("Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 764, 431);
+		setBounds(450, 200, 823, 508);
 		setResizable(true);
 		this.setLocationRelativeTo(null);
 		

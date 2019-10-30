@@ -27,6 +27,7 @@ public class frmPrincipal extends JFrame {
 	private JLabel lblUsuario;
 	private JLabel lblContrasena;
 	private JButton btnEntrar;
+	private JButton btnRegistrarse;
 	private JPasswordField pfContrasena;
 	
 	MySQLAccess cc = new MySQLAccess();
@@ -46,6 +47,23 @@ public class frmPrincipal extends JFrame {
 	public void createAndShowGUI()
 	{
 		getContentPane().setLayout(null);
+		
+		setTitle("BetMe");	
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		setBounds(450, 200, 823, 508);
+		
+		btnRegistrarse = new JButton("REGISTRARSE");
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				esconder();
+				frmRegistro registro = new frmRegistro();
+				registro.setVisible(true);
+			}
+		});
+		btnRegistrarse.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnRegistrarse.setBounds(666, 445, 141, 23);
+		getContentPane().add(btnRegistrarse);
 				
 		lblLogin = new JLabel("BetMe");
 		lblLogin.setForeground(Color.WHITE);
@@ -195,12 +213,7 @@ public class frmPrincipal extends JFrame {
 		lblFondo.setHorizontalAlignment(SwingConstants.LEFT);
 		lblFondo.setIcon(new ImageIcon(frmPrincipal.class.getResource("/Image/fondo.jpg")));
 		lblFondo.setBounds(0, 0, 817, 485);
-		getContentPane().add(lblFondo);		
-		
-		setTitle("BetMe");	
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		setBounds(450, 200, 823, 508);
-		
+		getContentPane().add(lblFondo);			
 		
 	}
 }

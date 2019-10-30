@@ -27,7 +27,7 @@ public class frmUsuario extends JFrame implements ActionListener {
 		
 		getContentPane().setForeground(Color.WHITE);
 		getContentPane().setBackground(new Color(46, 139, 87));
-		setBounds(100, 100, 764, 431);
+		setBounds(450, 200, 823, 508);
 		setResizable(true);		
 		getContentPane().setLayout(null);
 		
@@ -46,7 +46,7 @@ public class frmUsuario extends JFrame implements ActionListener {
 		lblFondo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFondo.setHorizontalAlignment(SwingConstants.LEFT);
 		lblFondo.setIcon(new ImageIcon(frmUsuario.class.getResource("/Image/132.jpg")));
-		lblFondo.setBounds(0, 0, 193, 383);
+		lblFondo.setBounds(0, 0, 230, 469);
 		getContentPane().add(lblFondo);
 		
 		txtCantidad = new JTextField();

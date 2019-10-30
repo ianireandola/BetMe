@@ -2,6 +2,7 @@ package LD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -40,7 +41,40 @@ public class MySQLAccess {
       return null;
     }    
     
-  } 
+  }
+  
+  public void añadirUsuario(int id_apostante, String usuario, String contraseña,String nombre, String tarjeta_credito,  int edad)
+  {	
+	  
+	  Connection con = null;     
+	
+	  try 
+	  {
+		  con = conexion();
+		  PreparedStatement ps;
+		  String sql = "INSERT INTO apostante (id_apostante, usuario, contraseña, nombre, tarjeta_credito, edad) VALUES(?,?,?,?,?,?)";
+		  	  
+		  ps = con.prepareStatement(sql);
+          ps.setInt(1, id_apostante);
+          ps.setString(2, usuario);
+          ps.setString(3, contraseña);
+          ps.setString(4, nombre);
+          ps.setString(5, tarjeta_credito);
+          ps.setInt(6, edad);
+          ps.executeUpdate();
+          ps.close();
+          System.out.println("Query executed");
+				
+	  } 
+	  catch (SQLException e) 
+	  {
+		  // TODO Auto-generated catch block
+		  e.printStackTrace();
+	  }	
+		
+	
+  }  
+  
   
   public boolean validarAdmin(String usuario, String contraseña) {
 		// TODO Auto-generated method stub

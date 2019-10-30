@@ -3,6 +3,8 @@ package LP;
 import javax.swing.JFrame;
 
 public class frmAdminDeportes extends JFrame{
+	public frmAdminDeportes() {
+	}
 
 	/**
 	 * 

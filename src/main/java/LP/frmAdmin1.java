@@ -47,7 +47,7 @@ public class frmAdmin1 extends JFrame implements ActionListener{
 		JMenu mnInicio = new JMenu("Inicio");
 		menuBar.add(mnInicio);
 		
-		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar sesin");
+		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar sesion");
 		mnInicio.add(mntmCerrarSesion);
 		mntmCerrarSesion.addActionListener(this);
 		mntmCerrarSesion.setActionCommand("CerrarSesion");

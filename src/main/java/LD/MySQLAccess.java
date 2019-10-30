@@ -6,41 +6,93 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class MySQLAccess {
 	
-  private Connection connect = null;
-  private Statement statement = null;
+  static Connection connect = null;
+  static Statement stmt = null;  
   private ResultSet resultSet = null;
-
-  final private String host = "remotemysql.com";
-  final private String user = "MkP8exBAnI";
-  final private String passwd = "QG6pqIU1QX";
   
-  public void readDataBase() throws Exception {
-    try {
+  final private static String host = "remotemysql.com";
+  final private static String user = "MkP8exBAnI";
+  final private static String passwd = "QG6pqIU1QX";
+  
+  public Connection conexion()
+  {
+    try 
+    {
       // This will load the MySQL driver, each DB has its own driver
       Class.forName("com.mysql.cj.jdbc.Driver");
       
       // Setup the connection with the DB
-      connect = DriverManager
-          .getConnection("jdbc:mysql://" + host + "/" + user + "?"
-              + "user=" + user + "&password=" + passwd );
+      Connection connect = DriverManager.getConnection("jdbc:mysql://" + host + "/" + user + "?" + "user=" + user + "&password=" + passwd );        
       
-      // Statements allow to issue SQL queries to the database
-      statement = connect.createStatement();
-      // Result set get the result of the SQL query
-      resultSet = statement
-          .executeQuery("select * from empleados_admin");
-      writeResultSet(resultSet);   
-                      
-    } catch (Exception e) {
-      throw e;
-    } finally {
-      close();
-    }
-
-  }  
+      stmt = connect.createStatement();
+      stmt.setQueryTimeout(30);
+      
+      return connect;
+      
+    } 
+    catch (Exception e) 
+    {
+      JOptionPane.showMessageDialog(null, "Error de Conexión " + e.getMessage());
+      return null;
+    }    
+    
+  } 
   
+  public boolean validarAdmin(String usuario, String contraseña) {
+		// TODO Auto-generated method stub
+		
+		boolean retorno = true;
+		try {
+      	ResultSet rs = stmt.executeQuery("select usuario,contraseña from empleados_admin where usuario='usuario' and contraseña='contraseña'");
+      	 while(rs.next() == true) {
+      		 
+      		 if(rs!=null)
+      		 {
+      			 retorno=true;
+      		 }
+      		 
+ 		
+      	 }
+      	 
+      	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return retorno; 
+  }
+
+  public boolean validarUsuario(String usuario, String contraseña) {
+		// TODO Auto-generated method stub
+		
+		boolean retorno = true;
+		try {
+    	ResultSet rs = stmt.executeQuery("select usuario,contraseña from apostante where usuario='usuario' and contraseña='contraseña'");
+    	 while(rs.next() == true) {
+    		 
+    		 if(rs!=null)
+    		 {
+    			 retorno=true;
+    		 }
+    		 
+		
+    	 }
+    	 
+    	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return retorno; 
+	}
+  
+  /*
   private void writeResultSet(ResultSet resultSet) throws SQLException 
   {
 	// ResultSet is initially before the first data set
@@ -51,8 +103,9 @@ public class MySQLAccess {
       System.out.println("ID: " + id);
       System.out.println("NOMBRE: " + nombre);
 	}
-  }
+  }*/
 
+  /*
   // You need to close the resultSet
   private void close() {
     try {
@@ -70,6 +123,6 @@ public class MySQLAccess {
     } catch (Exception e) {
 
     }
-  }
+  }*/
 
 }

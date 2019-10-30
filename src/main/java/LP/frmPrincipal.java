@@ -2,23 +2,25 @@ package LP;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.Timer;
 
-
+import LD.MySQLAccess;
 
 public class frmPrincipal extends JFrame {
 	
-	private static final long serialVersionUID = 1L;	
-	
+	private static final long serialVersionUID = 1L;		
 	
 	private JTextField textField_usuario;
 	private JLabel lblLogin;
@@ -26,85 +28,24 @@ public class frmPrincipal extends JFrame {
 	private JLabel lblContrasena;
 	private JButton btnEntrar;
 	private JPasswordField pfContrasena;
-	private JProgressBar progressBar;
 	
-	private Timer tiempo;
-	int cont;
-	public final static int TWO_SECOND = 20;
+	MySQLAccess cc = new MySQLAccess();
+	Connection con = cc.conexion();
 	
-	Connection connection = null;
-	private JButton btnRegistrarme;
-	
-		
 	public frmPrincipal()
 	{
 		getContentPane().setBackground(Color.BLACK);
 		setResizable(false);
 		createAndShowGUI();
-		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
-		progressBar.setVisible(false);
-	//	connection = MySQLAccess.readDataBase();
+		this.setLocationRelativeTo(null);	
 		
-	}
-	
-	/*
-	//Carga de la barra de progreso cuando inicia sesion el adiministrador
-	class TimeListener implements ActionListener
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			cont ++;
-			progressBar.setValue(cont);
-			if(cont==100)
-			{
-				tiempo.stop();
-				esconder();
-				JOptionPane.showMessageDialog(null, "Has iniciado sesi�n correctamente");
-				frmAdministrador objAdmin = new frmAdministrador();
-				objAdmin.setVisible(true);
-			}
-			
-		}
+	}		
 		
-	}
-	
-	//Carga de la barra de progreso cuando inicia sesion el usuario
-	class TimeListener2 implements ActionListener
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			cont ++;
-			progressBar.setValue(cont);
-			if(cont==100)
-			{
-				tiempo.stop();
-				esconder();
-				JOptionPane.showMessageDialog(null, "Has iniciado sesi�n correctamente");
-				frmUsuario objUsu = new frmUsuario();
-				objUsu.setVisible(true);
-			}
-			
-		}
-		
-	}
-	*/
-	
 	public void esconder(){this.setVisible(false);}
-	public void activar(){tiempo.start();}
-
+	
 	public void createAndShowGUI()
 	{
 		getContentPane().setLayout(null);
-		  
-		
-		
-		progressBar = new JProgressBar();
-		progressBar.setBounds(524, 424, 271, 23);
-		getContentPane().add(progressBar);
 				
 		lblLogin = new JLabel("BetMe");
 		lblLogin.setForeground(Color.WHITE);
@@ -134,110 +75,105 @@ public class frmPrincipal extends JFrame {
 		getContentPane().add(pfContrasena);
 		pfContrasena.setColumns(10);
 		
-		
-		
 		btnEntrar = new JButton("ENTRAR");
-		
-		/*
-		//Validacion de la entrada del administrador
-		btnEntrar.addActionListener(new ActionListener()
-		{
+		btnEntrar.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
-			@Override
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent arg0) 
 			{
 				try
 				{
-					String query = "select * from LOGIN where USERNAME=? and PASSWORD=? ";
-					PreparedStatement pst = connection.prepareStatement(query);
+					String query = "select * from empleados_admin where usuario=? and contraseña=? ";
+					PreparedStatement pst = con.prepareStatement(query);
 					pst.setString(1, textField_usuario.getText());
-					pst.setString(2, pfContrase�a.getText());
+					pst.setString(2, pfContrasena.getText());
+					
+					String query2 = "select * from apostante where usuario=? and contraseña=? ";
+					PreparedStatement pst2 = con.prepareStatement(query2);
+					pst2.setString(1, textField_usuario.getText());
+					pst2.setString(2, pfContrasena.getText());
 					
 					ResultSet rs = pst.executeQuery();
+					ResultSet rs2 = pst2.executeQuery();
+					
 					int count = 0;
+					int count2 = 0;
+					
 					while(rs.next())
 					{
-						count = count +1;
+						count = count + 1;
 					}
 					if(count == 1)
 					{
-						
-											
-						clsGestorAdministrador objA = new clsGestorAdministrador();	
-						
-	s
-						String nombre = textField_usuario.getText();
-						String contrase�a = pfContrase�a.getText();
+						String usuario = textField_usuario.getText();
+						String contraseña = pfContrasena.getText();
 				
-						BD base=new BD();
+						MySQLAccess base=new MySQLAccess();
 						
-						if(objA.LeerContrase�a(nombre, contrase�a)==true)
+						if(base.validarAdmin(usuario, contraseña)==true)
 						{
-							progressBar.setVisible(true);
-							cont=-1;
-							progressBar.setValue(0);
-							progressBar.setStringPainted(true);
-							tiempo = new Timer(TWO_SECOND, new TimeListener());
-							activar();
-													
-						}
-						else if (base.contrase�a(nombre,contrase�a)==true)
-						{	
-							progressBar.setVisible(true);
-							cont=-1;
-							progressBar.setValue(0);
-							progressBar.setStringPainted(true);
-							tiempo = new Timer(TWO_SECOND, new TimeListener2());
-							activar();
-							
-								
-						}
-						else if(base.contrase�a(nombre,contrase�a)==false)
-						{
-							System.out.println("nada");
-						}
+							System.out.println("ha entrado if Admin");
+							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
+							frmAdmin1 adm = new frmAdmin1();
+							adm.setVisible(true);							
+						}						
 					}
+					
+					while(rs2.next())
+					{
+						count2 = count2 + 1;								
+					}
+					
+					if(count2 == 1)
+					{
+						String usuario2 = textField_usuario.getText();
+						String contraseña2 = pfContrasena.getText();
+				
+						MySQLAccess base2=new MySQLAccess();
+						
+						if(base2.validarUsuario(usuario2, contraseña2)==true)
+						{
+							System.out.println("ha entrado if Usuario");
+							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
+							frmUsuario adm = new frmUsuario();
+							adm.setVisible(true);							
+						}								
+					}					
 					else if(count>1)
 					{
-						JOptionPane.showMessageDialog(null, "Usuario y contrase�a duplicados");
+						JOptionPane.showMessageDialog(null, "Usuario y contraseña duplicados");
+					}
+					else if(count2>1)
+					{
+						JOptionPane.showMessageDialog(null, "Usuario y contraseña duplicados");
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(null, "Usuario y/o contrase�a incorrectos");
-					}				
+						JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos");
+					}
 					
 					rs.close();
 					pst.close();
 					
-				}catch(Exception e1)
+					rs2.close();
+					pst2.close();
+					
+				}
+				catch(Exception e1)
 				{
 					//JOptionPane.showMessageDialog(null, e1);				
 				}
-							
 			}
-		});
-		
-		*/
+		});				
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnEntrar.setBounds(574, 263, 187, 32);
+		btnEntrar.setBounds(574, 272, 100, 23);
 		getContentPane().add(btnEntrar);
 		
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFondo.setHorizontalAlignment(SwingConstants.LEFT);
 		lblFondo.setIcon(new ImageIcon(frmPrincipal.class.getResource("/Image/fondo.jpg")));
-		lblFondo.setBounds(0, 16, 817, 469);
-		getContentPane().add(lblFondo);
-		
-		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnEntrar.setBounds(574, 272, 100, 23);
-		getContentPane().add(btnEntrar);
-		
-		btnRegistrarme = new JButton("REGISTRARME");
-		btnRegistrarme.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnRegistrarme.setBounds(559, 322, 137, 23);
-		getContentPane().add(btnRegistrarme);
-		
+		lblFondo.setBounds(0, 0, 817, 485);
+		getContentPane().add(lblFondo);		
 		
 		setTitle("BetMe");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	

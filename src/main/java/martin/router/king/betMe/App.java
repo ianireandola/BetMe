@@ -3,12 +3,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import LD.MySQLAccess;
-import LP.frmUsuario;
+import LP.frmPrincipal;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
 	public static void main(String[] args) 
@@ -17,7 +13,7 @@ public class App
 
 		    MySQLAccess dao = new MySQLAccess();
 		    try {
-				dao.readDataBase();
+				dao.conexion();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -34,7 +30,7 @@ public class App
 			    // If Nimbus is not available, you can set the GUI to another look and feel.
 			}	
 		    
-		    frmUsuario objPrincipal=new frmUsuario();
+		    frmPrincipal objPrincipal=new frmPrincipal();
 			objPrincipal.setVisible(true);
 		  
 	}

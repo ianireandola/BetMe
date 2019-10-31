@@ -43,6 +43,36 @@ public class MySQLAccess {
     
   }
   
+  public boolean existeID(int id_apostante)
+  {
+	
+		boolean retorno = false;
+		try 
+		{
+			ResultSet rs = stmt.executeQuery("select id_apostante from apostante where id_apostante = '"+id_apostante+"'");
+			
+			while(rs.next() == true) 
+			{
+      		 
+	      		 if(rs!=null)
+	      		 {
+	      			 retorno=true;
+	      			
+	      		 }		
+			}
+      	 
+      	
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			
+		}
+		
+		return retorno;
+		
+  }
+  
   public void añadirUsuario(int id_apostante, String usuario, String contraseña,String nombre, String tarjeta_credito,  int edad)
   {	
 	  

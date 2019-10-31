@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -11,29 +14,48 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 public class frmAdmin1 extends JFrame implements ActionListener{
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JDesktopPane miDesktop;
 	
-	public frmAdmin1() {
-		
+	private JLabel lblFondo;
+	
+	private JMenuBar menuBar;
+	
+	private JMenu mnInicio;
+	private JMenu mnDeporte;
+	private JMenu mnPartidos;
+	
+	private JMenuItem mntmCerrarSesion;
+	private JMenuItem mntmSalir;
+	private JMenuItem mntmNuevoDeporte;
+	private JMenuItem mntmModificarDeporte;
+	private JMenuItem mntmEliminarDeporte;
+	private JMenuItem mntmNuevoPartido;
+	private JMenuItem mntmModificarPartido;
+	private JMenuItem mntmCancelarPartido;
+	
+	public frmAdmin1() 
+	{
 		getContentPane().setBackground(Color.WHITE);
-		
-		
-		setTitle("Administrador");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(450, 200, 823, 508);
 		setResizable(true);
+		createAndShowGUI();
 		this.setLocationRelativeTo(null);
+	}
 		
-		
-		JLabel lblFondo = new JLabel("");
+	public void createAndShowGUI()
+	{
+				
+		setTitle("BetMe - Administrador");	
+		this.setIconImage(new ImageIcon(getClass().getResource("/Image/betme.jpg")).getImage());
+		setBounds(450, 200, 823, 508);
+				
+		lblFondo = new JLabel("");
 		lblFondo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFondo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFondo.setIcon(new ImageIcon(frmAdmin1.class.getResource("/Image/deporte.jpg")));
@@ -41,60 +63,75 @@ public class frmAdmin1 extends JFrame implements ActionListener{
 		getContentPane().add(lblFondo);
 		
 		
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnInicio = new JMenu("Inicio");
+		mnInicio = new JMenu("Inicio");
 		menuBar.add(mnInicio);
 		
-		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar sesion");
+		mntmCerrarSesion = new JMenuItem("Cerrar sesion");
 		mnInicio.add(mntmCerrarSesion);
 		mntmCerrarSesion.addActionListener(this);
 		mntmCerrarSesion.setActionCommand("CerrarSesion");
 		
 		
-		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir = new JMenuItem("Salir");
 		mnInicio.add(mntmSalir);
 		mntmSalir.addActionListener(this);
 		mntmSalir.setActionCommand("Salir");
 		
-		JMenu mnDeporte = new JMenu("Deporte");
+		mnDeporte = new JMenu("Deporte");
 		menuBar.add(mnDeporte);
 		
-		JMenuItem mntmNuevoDeporte = new JMenuItem("Nuevo");
+		mntmNuevoDeporte = new JMenuItem("Nuevo");
 		mnDeporte.add(mntmNuevoDeporte);
 		mntmNuevoDeporte.addActionListener(this);
 		mntmNuevoDeporte.setActionCommand("NuevoDeporte");		
 		
 		
-		JMenuItem mntmModificarDeporte = new JMenuItem("Modificar");
+		mntmModificarDeporte = new JMenuItem("Modificar");
 		mnDeporte.add(mntmModificarDeporte);
 		mntmModificarDeporte.addActionListener(this);
 		mntmModificarDeporte.setActionCommand("ModificarDeporte");
 		
-		JMenuItem mntmEliminarDeporte = new JMenuItem("Eliminar");
+		mntmEliminarDeporte = new JMenuItem("Eliminar");
 		mnDeporte.add(mntmEliminarDeporte);
 		mntmEliminarDeporte.addActionListener(this);
 		mntmEliminarDeporte.setActionCommand("EliminarDeporte");
 		
-		JMenu mnPartidos = new JMenu("Partidos");
+		mnPartidos = new JMenu("Partidos");
 		menuBar.add(mnPartidos);
 		
-		JMenuItem mntmNuevoPartido = new JMenuItem("Nuevo");
+		mntmNuevoPartido = new JMenuItem("Nuevo");
 		mnPartidos.add(mntmNuevoPartido);
 		mntmNuevoPartido.addActionListener(this);
 		mntmNuevoPartido.setActionCommand("NuevoPartido");
 		
-		JMenuItem mntmModificarPartido = new JMenuItem("Modificar");
+		mntmModificarPartido = new JMenuItem("Modificar");
 		mnPartidos.add(mntmModificarPartido);
 		mntmModificarPartido.addActionListener(this);
 		mntmModificarPartido.setActionCommand("ModificarPartido");
 		
 		
-		JMenuItem mntmCancelarPartido = new JMenuItem("Cancelar");
+		mntmCancelarPartido = new JMenuItem("Cancelar");
 		mnPartidos.add(mntmCancelarPartido);
 		mntmCancelarPartido.addActionListener(this);
 		mntmCancelarPartido.setActionCommand("CancelarPartido");
+		
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() 
+		{
+		    @Override
+		    public void windowClosing(WindowEvent we)
+		    { 
+		        String ObjButtons[] = {"Si","Cancelar"};
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        if(PromptResult==JOptionPane.YES_OPTION)
+		        {
+		            System.exit(0);
+		        }
+		    }
+		});
 	}
 
 	@Override

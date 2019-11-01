@@ -20,47 +20,53 @@ import javax.swing.SwingConstants;
 import LD.MySQLAccess;
 import javax.swing.JSpinner;
 
-public class frmRegistro extends JFrame {
-	
+public class frmRegistro extends JFrame 
+{	
 	private static final long serialVersionUID = 1L;		
 	
 	private JTextField txtUsuario;
+	private JTextField txtNombre;
+	private JTextField txtTarjeta;
+	
 	private JLabel lblLogin;
 	private JLabel lblUsuario;
 	private JLabel lblContrasena;
 	private JLabel lblContrasenaCon;
-	private JButton btnRegistrarse;
-	private JButton btnVolver;
-	private JPasswordField pfContrasena;
-	
-	MySQLAccess cc = new MySQLAccess();
-	Connection con = cc.conexion();
 	private JLabel lblId;
 	private JLabel lblNombre;
 	private JLabel lblTarjetaDeCredito;
 	private JLabel lblEdad;
-	private JTextField txtNombre;
-	private JTextField txtTarjeta;
+	
+	private JButton btnRegistrarse;
+	private JButton btnVolver;
+	
+	private JPasswordField pfContrasena;
+	private JPasswordField pfContrasenaCon;		
+	
 	private JSpinner spinnerEdad;
 	private JSpinner spinnerID;
-	private JPasswordField pfContrasenaCon;
+		
+	MySQLAccess cc = new MySQLAccess();
+	Connection con = cc.conexion();
 	
 	public frmRegistro()
 	{
 		getContentPane().setBackground(Color.DARK_GRAY);
+		getContentPane().setLayout(null);
 		setResizable(false);
 		createAndShowGUI();
 		this.setLocationRelativeTo(null);	
 		
 	}		
 		
-	public void esconder(){this.setVisible(false);}
+	public void esconder()
+	{
+		this.setVisible(false);
+	}
 	
 	public void createAndShowGUI()
-	{
-		getContentPane().setLayout(null);
-		
-		setTitle("BetMe");	
+	{		
+		setTitle("BetMe - Formulario de registro");	
 		this.setIconImage(new ImageIcon(getClass().getResource("/Image/betme.jpg")).getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setBounds(450, 200, 823, 508);

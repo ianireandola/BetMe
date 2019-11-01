@@ -9,11 +9,11 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-public class MySQLAccess {
+public class MySQLAccess 
+{
 	
   static Connection connect = null;
-  static Statement stmt = null;  
-  private ResultSet resultSet = null;
+  static Statement stmt = null;   
   
   final private static String host = "remotemysql.com";
   final private static String user = "MkP8exBAnI";
@@ -44,32 +44,29 @@ public class MySQLAccess {
   }
   
   public boolean existeID(int id_apostante)
-  {
-	
-		boolean retorno = false;
-		try 
-		{
-			ResultSet rs = stmt.executeQuery("select id_apostante from apostante where id_apostante = '"+id_apostante+"'");
-			
-			while(rs.next() == true) 
-			{
-      		 
-	      		 if(rs!=null)
-	      		 {
-	      			 retorno=true;
-	      			
-	      		 }		
-			}
-      	 
-      	
-		} 
-		catch (SQLException e) 
-		{
-			// TODO Auto-generated catch block
-			
-		}
+  {	
+	boolean retorno = false;
+	try 
+	{
+		ResultSet rs = stmt.executeQuery("select id_apostante from apostante where id_apostante = '"+id_apostante+"'");
 		
-		return retorno;
+		while(rs.next() == true) 
+		{     		 
+	   		 if(rs!=null)
+	   		 {
+	   			 retorno=true;
+	   			
+	   		 }		
+		}     	 
+     	
+	} 
+	catch (SQLException e) 
+	{
+		// TODO Auto-generated catch block
+		
+	}
+	
+	return retorno;
 		
   }
   
@@ -106,24 +103,28 @@ public class MySQLAccess {
   }  
   
   
-  public boolean validarAdmin(String usuario, String contraseña) {
-		// TODO Auto-generated method stub
+  public boolean validarAdmin(String usuario, String contraseña) 
+  {		
 		
 		boolean retorno = true;
-		try {
-      	ResultSet rs = stmt.executeQuery("select usuario,contraseña from empleados_admin where usuario='usuario' and contraseña='contraseña'");
-      	 while(rs.next() == true) {
+		try 
+		{
+			ResultSet rs = stmt.executeQuery("select usuario,contraseña from empleados_admin where usuario='usuario' and contraseña='contraseña'");
+			while(rs.next() == true) 
+			{
       		 
-      		 if(rs!=null)
-      		 {
-      			 retorno=true;
-      		 }
-      		 
+	      		 if(rs!=null)
+	      		 {
+	      			 retorno=true;
+	      		 }
+	      		 
  		
-      	 }
+			}
       	 
       	
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -131,24 +132,25 @@ public class MySQLAccess {
 		return retorno; 
   }
 
-  public boolean validarUsuario(String usuario, String contraseña) {
-		// TODO Auto-generated method stub
-		
+  public boolean validarUsuario(String usuario, String contraseña) 
+  {
+				
 		boolean retorno = true;
-		try {
-    	ResultSet rs = stmt.executeQuery("select usuario,contraseña from apostante where usuario='usuario' and contraseña='contraseña'");
-    	 while(rs.next() == true) {
-    		 
-    		 if(rs!=null)
-    		 {
-    			 retorno=true;
-    		 }
-    		 
-		
-    	 }
+		try 
+		{
+			ResultSet rs = stmt.executeQuery("select usuario,contraseña from apostante where usuario='usuario' and contraseña='contraseña'");
+			while(rs.next() == true) 
+			{    		 
+	    		 if(rs!=null)
+	    		 {
+	    			 retorno=true;
+	    		 }		
+			}
     	 
     	
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

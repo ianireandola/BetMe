@@ -13,27 +13,46 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
 
-public class frmAdmin1 extends JFrame implements ActionListener{
-	
-	/**
-	 * 
-	 */
+public class frmAdmin1 extends JFrame implements ActionListener
+{
+	 
 	private static final long serialVersionUID = 1L;
 	private JDesktopPane miDesktop;
 	
-	public frmAdmin1() {
-		
+	private JLabel lblFondo;
+	
+	private JMenuBar menuBar;
+	
+	private JMenu mnInicio;
+	private JMenu mnDeporte;
+	private JMenu mnPartidos;
+	private JMenu mnPromocin;
+	
+	private JMenuItem mntmCerrarSesion;
+	private JMenuItem mntmSalir;
+	private JMenuItem mntmNuevoDeporte;
+	private JMenuItem mntmEliminarDeporte;
+	private JMenuItem mntmNuevoPartido;
+	private JMenuItem mntmModificarPartido;
+	private JMenuItem mntmCancelarPartido;
+	private JMenuItem mntmCrear;
+	private JMenuItem mntmEliminar;	
+	
+	public frmAdmin1() 
+	{	
 		getContentPane().setBackground(Color.WHITE);
-		
-		
-		setTitle("Administrador");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 764, 431);
 		setResizable(true);
+		createAndShowGUI();
 		this.setLocationRelativeTo(null);
+	}
+	
+	public void createAndShowGUI() 
+	{		
+		setTitle("BetMe - Administrador");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 764, 431);		
 		
-		
-		JLabel lblFondo = new JLabel("");
+		lblFondo = new JLabel("");
 		lblFondo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFondo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFondo.setIcon(new ImageIcon(frmAdmin1.class.getResource("/Image/deporte.jpg")));
@@ -41,67 +60,67 @@ public class frmAdmin1 extends JFrame implements ActionListener{
 		getContentPane().add(lblFondo);
 		
 		
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnInicio = new JMenu("Inicio");
+		mnInicio = new JMenu("Inicio");
 		menuBar.add(mnInicio);
 		
-		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar sesion");
+		mntmCerrarSesion = new JMenuItem("Cerrar sesion");
 		mnInicio.add(mntmCerrarSesion);
 		mntmCerrarSesion.addActionListener(this);
 		mntmCerrarSesion.setActionCommand("CerrarSesion");
 		
 		
-		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir = new JMenuItem("Salir");
 		mnInicio.add(mntmSalir);
 		mntmSalir.addActionListener(this);
 		mntmSalir.setActionCommand("Salir");
 		
-		JMenu mnDeporte = new JMenu("Deporte");
+		mnDeporte = new JMenu("Deporte");
 		menuBar.add(mnDeporte);
 		
-		JMenuItem mntmNuevoDeporte = new JMenuItem("Nuevo");
+		mntmNuevoDeporte = new JMenuItem("Nuevo");
 		mnDeporte.add(mntmNuevoDeporte);
 		mntmNuevoDeporte.addActionListener(this);
 		mntmNuevoDeporte.setActionCommand("NuevoDeporte");
 		
-		JMenuItem mntmEliminarDeporte = new JMenuItem("Eliminar");
+		mntmEliminarDeporte = new JMenuItem("Eliminar");
 		mnDeporte.add(mntmEliminarDeporte);
 		mntmEliminarDeporte.addActionListener(this);
 		mntmEliminarDeporte.setActionCommand("EliminarDeporte");
 		
-		JMenu mnPartidos = new JMenu("Partidos");
+		mnPartidos = new JMenu("Partidos");
 		menuBar.add(mnPartidos);
 		
-		JMenuItem mntmNuevoPartido = new JMenuItem("Nuevo");
+		mntmNuevoPartido = new JMenuItem("Nuevo");
 		mnPartidos.add(mntmNuevoPartido);
 		mntmNuevoPartido.addActionListener(this);
 		mntmNuevoPartido.setActionCommand("NuevoPartido");
 		
-		JMenuItem mntmModificarPartido = new JMenuItem("Modificar");
+		mntmModificarPartido = new JMenuItem("Modificar");
 		mnPartidos.add(mntmModificarPartido);
 		mntmModificarPartido.addActionListener(this);
-		mntmModificarPartido.setActionCommand("ModificarPartido");
+		mntmModificarPartido.setActionCommand("ModificarPartido");		
 		
-		
-		JMenuItem mntmCancelarPartido = new JMenuItem("Cancelar");
+		mntmCancelarPartido = new JMenuItem("Cancelar");
 		mnPartidos.add(mntmCancelarPartido);
 		mntmCancelarPartido.addActionListener(this);
 		mntmCancelarPartido.setActionCommand("CancelarPartido");
 		
-		JMenu mnPromocin = new JMenu("PromociÃ³n");
+		mnPromocin = new JMenu("Promocion");
 		menuBar.add(mnPromocin);
 		
-		JMenuItem mntmCrear = new JMenuItem("Crear");
+		mntmCrear = new JMenuItem("Crear");
 		mnPromocin.add(mntmCrear);
 		
-		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
+		mntmEliminar = new JMenuItem("Eliminar");
 		mnPromocin.add(mntmEliminar);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
 		// TODO Auto-generated method stub
 		
 		switch(e.getActionCommand())
@@ -132,9 +151,7 @@ public class frmAdmin1 extends JFrame implements ActionListener{
 				break;
 			case "CancelarPartido":
 				this.cancelarPartido();
-				break;
-			
-				
+				break;				
 							
 			}
 	

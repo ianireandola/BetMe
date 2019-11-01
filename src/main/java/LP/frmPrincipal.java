@@ -20,7 +20,8 @@ import javax.swing.SwingConstants;
 
 import LD.MySQLAccess;
 
-public class frmPrincipal extends JFrame {
+public class frmPrincipal extends JFrame 
+{
 	
 	private static final long serialVersionUID = 1L;		
 	
@@ -56,7 +57,8 @@ public class frmPrincipal extends JFrame {
 		setBounds(450, 200, 823, 508);
 		
 		btnRegistrarse = new JButton("REGISTRARSE");
-		btnRegistrarse.addActionListener(new ActionListener() {
+		btnRegistrarse.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				esconder();
@@ -97,7 +99,8 @@ public class frmPrincipal extends JFrame {
 		pfContrasena.setColumns(10);
 		
 		btnEntrar = new JButton("ENTRAR");
-		btnEntrar.addActionListener(new ActionListener() {
+		btnEntrar.addActionListener(new ActionListener() 
+		{
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) 
 			{

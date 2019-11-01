@@ -18,49 +18,71 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 
-public class frmNuevoPartido extends JFrame implements ActionListener{
+public class frmNuevoPartido extends JFrame implements ActionListener
+{	
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	private JTextField textField;
 	private JTextField textField_1;
-	public frmNuevoPartido() {
-		getContentPane().setLayout(null);
-		
-		
+	
+	private JLabel lblDeporte;
+	private JLabel lblVisitante;
+	private JLabel lblEquipoVisitante;
+	private JLabel lblFecha;
+	private JLabel lblCuota;
+	
+	private JComboBox comboBoxDeporte;
+	private JComboBox comboBoxLocal;
+	private JComboBox comboBoxVisitante;
+	
+	private JButton btnCrearPartido;
+	
+	private ButtonIcon btnLogOut;
+	
+	public frmNuevoPartido() 
+	{
 		getContentPane().setBackground(SystemColor.menu);
-		getContentPane().setLayout(null);
+		getContentPane().setLayout(null);		
+		setResizable(true);	
+		this.setLocationRelativeTo(null);	
 		
-		JLabel lblDeporte = new JLabel("Deporte");
+		createAndShowGUI();
+	}
+	
+	public void createAndShowGUI()
+	{
+		setTitle("BetMe - Nuevo partido");	
+		setBounds(100, 100, 616, 457);
+				
+		lblDeporte = new JLabel("Deporte");
 		lblDeporte.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblDeporte.setBounds(33, 16, 101, 26);
 		getContentPane().add(lblDeporte);
 		
-		JComboBox comboBoxDeporte = new JComboBox();
+		comboBoxDeporte = new JComboBox();
 		comboBoxDeporte.setBounds(33, 50, 157, 26);
 		getContentPane().add(comboBoxDeporte);
 		
-		JLabel lblVisitante = new JLabel("Equipo local");
+		lblVisitante = new JLabel("Equipo local");
 		lblVisitante.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblVisitante.setBounds(37, 111, 112, 26);
 		getContentPane().add(lblVisitante);
 		
-		JComboBox comboBoxLocal = new JComboBox();
+		comboBoxLocal = new JComboBox();
 		comboBoxLocal.setBounds(33, 153, 157, 26);
 		getContentPane().add(comboBoxLocal);
 		
-		JLabel lblEquipoVisitante = new JLabel("Equipo visitante");
+		lblEquipoVisitante = new JLabel("Equipo visitante");
 		lblEquipoVisitante.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblEquipoVisitante.setBounds(269, 111, 169, 26);
 		getContentPane().add(lblEquipoVisitante);
 		
-		JComboBox comboBoxVisitante = new JComboBox();
+		comboBoxVisitante = new JComboBox();
 		comboBoxVisitante.setBounds(269, 153, 157, 26);
 		getContentPane().add(comboBoxVisitante);
 		
-		JLabel lblFecha = new JLabel("Fecha");
+		lblFecha = new JLabel("Fecha");
 		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblFecha.setBounds(269, 16, 69, 20);
 		getContentPane().add(lblFecha);
@@ -70,7 +92,7 @@ public class frmNuevoPartido extends JFrame implements ActionListener{
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblCuota = new JLabel("Cuota");
+		lblCuota = new JLabel("Cuota");
 		lblCuota.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		lblCuota.setBounds(33, 210, 69, 20);
 		getContentPane().add(lblCuota);
@@ -82,23 +104,20 @@ public class frmNuevoPartido extends JFrame implements ActionListener{
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
-		JButton btnCrearPartido = new JButton("CREAR PARTIDO");
+		btnCrearPartido = new JButton("CREAR PARTIDO");
 		btnCrearPartido.setBackground(Color.WHITE);
 		btnCrearPartido.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnCrearPartido.setIcon(new ImageIcon(frmNuevoPartido.class.getResource("/Image/aÃ±adir equipo.png")));
 		btnCrearPartido.setBounds(196, 296, 230, 29);
-		getContentPane().add(btnCrearPartido);
-		setBounds(100, 100, 616, 457);
-		setResizable(true);	
-		this.setLocationRelativeTo(null);	
+		getContentPane().add(btnCrearPartido);		
 		
-		setTitle("BetMe - Nuevo partido");	
-		
-		ButtonIcon btnLogOut = new ButtonIcon();
+		btnLogOut = new ButtonIcon();
         btnLogOut.setIcon(new ImageIcon(frmAdmin.class.getResource("/Image/logout.png")));
         btnLogOut.setBounds(509, 32, 39, 36);
-        btnLogOut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLogOut.addActionListener(new java.awt.event.ActionListener() 
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt) 
+            {
             	String ObjButtons[] = {"Si","Cancelar"};
 		        int PromptResult = JOptionPane.showOptionDialog(null,"Quieres cerrar sesin?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
@@ -113,15 +132,10 @@ public class frmNuevoPartido extends JFrame implements ActionListener{
         
         getContentPane().add(btnLogOut);
 	}
-
-	
-
-	
-	
-	
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
 		// TODO Auto-generated method stub
 		
 	}

@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -14,48 +11,29 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 public class frmAdmin1 extends JFrame implements ActionListener{
 	
-	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	private JDesktopPane miDesktop;
 	
-	private JLabel lblFondo;
-	
-	private JMenuBar menuBar;
-	
-	private JMenu mnInicio;
-	private JMenu mnDeporte;
-	private JMenu mnPartidos;
-	
-	private JMenuItem mntmCerrarSesion;
-	private JMenuItem mntmSalir;
-	private JMenuItem mntmNuevoDeporte;
-	private JMenuItem mntmModificarDeporte;
-	private JMenuItem mntmEliminarDeporte;
-	private JMenuItem mntmNuevoPartido;
-	private JMenuItem mntmModificarPartido;
-	private JMenuItem mntmCancelarPartido;
-	
-	public frmAdmin1() 
-	{
-		getContentPane().setBackground(Color.WHITE);
-		setResizable(true);
-		createAndShowGUI();
-		this.setLocationRelativeTo(null);
-	}
+	public frmAdmin1() {
 		
-	public void createAndShowGUI()
-	{
-				
-		setTitle("BetMe - Administrador");	
-		this.setIconImage(new ImageIcon(getClass().getResource("/Image/betme.jpg")).getImage());
-		setBounds(450, 200, 823, 508);
-				
-		lblFondo = new JLabel("");
+		getContentPane().setBackground(Color.WHITE);
+		
+		
+		setTitle("Administrador");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 764, 431);
+		setResizable(true);
+		this.setLocationRelativeTo(null);
+		
+		
+		JLabel lblFondo = new JLabel("");
 		lblFondo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFondo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFondo.setIcon(new ImageIcon(frmAdmin1.class.getResource("/Image/deporte.jpg")));
@@ -63,75 +41,63 @@ public class frmAdmin1 extends JFrame implements ActionListener{
 		getContentPane().add(lblFondo);
 		
 		
-		menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		mnInicio = new JMenu("Inicio");
+		JMenu mnInicio = new JMenu("Inicio");
 		menuBar.add(mnInicio);
 		
-		mntmCerrarSesion = new JMenuItem("Cerrar sesion");
+		JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar sesion");
 		mnInicio.add(mntmCerrarSesion);
 		mntmCerrarSesion.addActionListener(this);
 		mntmCerrarSesion.setActionCommand("CerrarSesion");
 		
 		
-		mntmSalir = new JMenuItem("Salir");
+		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mnInicio.add(mntmSalir);
 		mntmSalir.addActionListener(this);
 		mntmSalir.setActionCommand("Salir");
 		
-		mnDeporte = new JMenu("Deporte");
+		JMenu mnDeporte = new JMenu("Deporte");
 		menuBar.add(mnDeporte);
 		
-		mntmNuevoDeporte = new JMenuItem("Nuevo");
+		JMenuItem mntmNuevoDeporte = new JMenuItem("Nuevo");
 		mnDeporte.add(mntmNuevoDeporte);
 		mntmNuevoDeporte.addActionListener(this);
-		mntmNuevoDeporte.setActionCommand("NuevoDeporte");		
+		mntmNuevoDeporte.setActionCommand("NuevoDeporte");
 		
-		
-		mntmModificarDeporte = new JMenuItem("Modificar");
-		mnDeporte.add(mntmModificarDeporte);
-		mntmModificarDeporte.addActionListener(this);
-		mntmModificarDeporte.setActionCommand("ModificarDeporte");
-		
-		mntmEliminarDeporte = new JMenuItem("Eliminar");
+		JMenuItem mntmEliminarDeporte = new JMenuItem("Eliminar");
 		mnDeporte.add(mntmEliminarDeporte);
 		mntmEliminarDeporte.addActionListener(this);
 		mntmEliminarDeporte.setActionCommand("EliminarDeporte");
 		
-		mnPartidos = new JMenu("Partidos");
+		JMenu mnPartidos = new JMenu("Partidos");
 		menuBar.add(mnPartidos);
 		
-		mntmNuevoPartido = new JMenuItem("Nuevo");
+		JMenuItem mntmNuevoPartido = new JMenuItem("Nuevo");
 		mnPartidos.add(mntmNuevoPartido);
 		mntmNuevoPartido.addActionListener(this);
 		mntmNuevoPartido.setActionCommand("NuevoPartido");
 		
-		mntmModificarPartido = new JMenuItem("Modificar");
+		JMenuItem mntmModificarPartido = new JMenuItem("Modificar");
 		mnPartidos.add(mntmModificarPartido);
 		mntmModificarPartido.addActionListener(this);
 		mntmModificarPartido.setActionCommand("ModificarPartido");
 		
 		
-		mntmCancelarPartido = new JMenuItem("Cancelar");
+		JMenuItem mntmCancelarPartido = new JMenuItem("Cancelar");
 		mnPartidos.add(mntmCancelarPartido);
 		mntmCancelarPartido.addActionListener(this);
 		mntmCancelarPartido.setActionCommand("CancelarPartido");
 		
-		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		addWindowListener(new WindowAdapter() 
-		{
-		    @Override
-		    public void windowClosing(WindowEvent we)
-		    { 
-		        String ObjButtons[] = {"Si","Cancelar"};
-		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
-		        if(PromptResult==JOptionPane.YES_OPTION)
-		        {
-		            System.exit(0);
-		        }
-		    }
-		});
+		JMenu mnPromocin = new JMenu("PromociÃ³n");
+		menuBar.add(mnPromocin);
+		
+		JMenuItem mntmCrear = new JMenuItem("Crear");
+		mnPromocin.add(mntmCrear);
+		
+		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
+		mnPromocin.add(mntmEliminar);
 	}
 
 	@Override
@@ -152,9 +118,7 @@ public class frmAdmin1 extends JFrame implements ActionListener{
 				this.nuevoDeporte();
 				break;
 				
-			case "ModificarDeporte":
-				this.modificarDeporte();
-				break;
+			
 			case "EliminarDeporte":
 				this.eliminarDeporte();
 				break;
@@ -211,13 +175,7 @@ public class frmAdmin1 extends JFrame implements ActionListener{
 		
 	}
 	
-	public void modificarDeporte()
-	{
-		
-		frmModificarDeporte frame=new frmModificarDeporte();
-		frame.setVisible(true);		
-		
-	}
+	
 	
 	public void eliminarDeporte()
 	{

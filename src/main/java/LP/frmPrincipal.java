@@ -130,7 +130,7 @@ public class frmPrincipal extends JFrame {
 							esconder();
 							control=1;
 							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
-							frmAdmin1 adm = new frmAdmin1();
+							frmAdmin adm = new frmAdmin();
 							adm.setVisible(true);							
 						}
 						else if(base.validarAdmin(usuario, contraseña)==false)

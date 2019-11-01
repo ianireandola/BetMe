@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-public class frmModificarDeporte extends JFrame implements ActionListener{
+public class frmAdminRecordatorios extends JFrame implements ActionListener {
 
 	/**
 	 * 

@@ -87,7 +87,7 @@ public class frmPrincipal extends JFrame
 		getContentPane().add(textField_usuario);
 		textField_usuario.setColumns(10);
 		
-		lblContrasena = new JLabel("CONTRASE\u00D1A");
+		lblContrasena = new JLabel("CONTRASEÑA");
 		lblContrasena.setForeground(Color.WHITE);
 		lblContrasena.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblContrasena.setBounds(641, 177, 141, 23);
@@ -108,7 +108,7 @@ public class frmPrincipal extends JFrame
 				
 				try
 				{
-					String query = "select * from empleados_admin where usuario=? and contraseÃ±a=? ";
+					String query = "select * from empleados_admin where usuario=? and contraseña=? ";
 					PreparedStatement pst = con.prepareStatement(query);
 					pst.setString(1, textField_usuario.getText());
 					pst.setString(2, pfContrasena.getText());				
@@ -124,19 +124,19 @@ public class frmPrincipal extends JFrame
 					if(count == 1)
 					{
 						String usuario = textField_usuario.getText();
-						String contraseÃ±a = pfContrasena.getText();
+						String contraseña = pfContrasena.getText();
 				
 						MySQLAccess base=new MySQLAccess();
 						
-						if(base.validarAdmin(usuario, contraseÃ±a)==true)
+						if(base.validarAdmin(usuario, contraseña)==true)
 						{
 							esconder();
 							control=1;
-							JOptionPane.showMessageDialog(null, "Has iniciado sesiÃ³n correctamente");
+							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
 							frmAdmin adm = new frmAdmin();
 							adm.setVisible(true);							
 						}
-						else if(base.validarAdmin(usuario, contraseÃ±a)==false)
+						else if(base.validarAdmin(usuario, contraseña)==false)
 						{
 							System.out.println("nada");
 													
@@ -144,7 +144,7 @@ public class frmPrincipal extends JFrame
 					}					
 					else if(count>1)
 					{
-						JOptionPane.showMessageDialog(null, "Usuario y contraseÃ±a duplicados");
+						JOptionPane.showMessageDialog(null, "Usuario y contraseña duplicados");
 					}					
 										
 					rs.close();
@@ -158,7 +158,7 @@ public class frmPrincipal extends JFrame
 				
 				try 
 				{
-					String query2 = "select * from apostante where usuario=? and contraseÃ±a=? ";
+					String query2 = "select * from apostante where usuario=? and contraseña=? ";
 					PreparedStatement pst2 = con.prepareStatement(query2);
 					pst2.setString(1, textField_usuario.getText());
 					pst2.setString(2, pfContrasena.getText());
@@ -175,30 +175,30 @@ public class frmPrincipal extends JFrame
 					if(count2 == 1)
 					{
 						String usuario2 = textField_usuario.getText();
-						String contraseÃ±a2 = pfContrasena.getText();
+						String contraseña2 = pfContrasena.getText();
 				
 						MySQLAccess base2=new MySQLAccess();
 						
-						if(base2.validarUsuario(usuario2, contraseÃ±a2)==true)
+						if(base2.validarUsuario(usuario2, contraseña2)==true)
 						{
 							esconder();
-							JOptionPane.showMessageDialog(null, "Has iniciado sesiÃ³n correctamente");
+							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
 							frmUsuario adm = new frmUsuario();
 							adm.setVisible(true);							
 						}
-						else if(base2.validarUsuario(usuario2, contraseÃ±a2)==false)
+						else if(base2.validarUsuario(usuario2, contraseña2)==false)
 						{
 							System.out.println("nada");														
 						}
 					}					
 					else if(count2>1)
 					{
-						JOptionPane.showMessageDialog(null, "Usuario y contraseÃ±a duplicados");
+						JOptionPane.showMessageDialog(null, "Usuario y contraseña duplicados");
 					}
 					else if(control != 1)
 					{
 						System.out.println("entra en 2");
-						JOptionPane.showMessageDialog(null, "Usuario y/o contraseÃ±a incorrectas");
+						JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectas");
 					}
 					
 					rs2.close();
@@ -228,7 +228,7 @@ public class frmPrincipal extends JFrame
 		    public void windowClosing(WindowEvent we)
 		    { 
 		        String ObjButtons[] = {"Si","Cancelar"};
-		        int PromptResult = JOptionPane.showOptionDialog(null,"Â¿Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 		            System.exit(0);

@@ -83,7 +83,7 @@ public class frmAdmin extends javax.swing.JFrame
       
         if(menu.getSelectedtitulo().equals("Partidos"))
         {
-        	frmAdminPartidos frame=new frmAdminPartidos();
+        	frmGestionPartidos frame=new frmGestionPartidos();
         	frame.setVisible(true);        	
         	frame.toFront();
         	this.setVisible(false);

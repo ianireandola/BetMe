@@ -1,6 +1,7 @@
 package LD;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class MySQLAccess 
 {
@@ -70,7 +73,7 @@ public class MySQLAccess
 		
   }
   
-  public void aÃ±adirUsuario(int id_apostante, String usuario, String contraseÃ±a,String nombre, String tarjeta_credito,  int edad)
+  public void añadirUsuario(int id_apostante, String usuario, String contraseña,String nombre, String tarjeta_credito,  int edad)
   {	
 	  
 	  Connection con = null;     
@@ -79,12 +82,12 @@ public class MySQLAccess
 	  {
 		  con = conexion();
 		  PreparedStatement ps;
-		  String sql = "INSERT INTO apostante (id_apostante, usuario, contraseÃ±a, nombre, tarjeta_credito, edad) VALUES(?,?,?,?,?,?)";
+		  String sql = "INSERT INTO apostante (id_apostante, usuario, contraseña, nombre, tarjeta_credito, edad) VALUES(?,?,?,?,?,?)";
 		  	  
 		  ps = con.prepareStatement(sql);
           ps.setInt(1, id_apostante);
           ps.setString(2, usuario);
-          ps.setString(3, contraseÃ±a);
+          ps.setString(3, contraseña);
           ps.setString(4, nombre);
           ps.setString(5, tarjeta_credito);
           ps.setInt(6, edad);
@@ -103,13 +106,13 @@ public class MySQLAccess
   }  
   
   
-  public boolean validarAdmin(String usuario, String contraseÃ±a) 
+  public boolean validarAdmin(String usuario, String contraseña) 
   {		
 		
 		boolean retorno = true;
 		try 
 		{
-			ResultSet rs = stmt.executeQuery("select usuario,contraseÃ±a from empleados_admin where usuario='usuario' and contraseÃ±a='contraseÃ±a'");
+			ResultSet rs = stmt.executeQuery("select usuario,contraseña from empleados_admin where usuario='usuario' and contraseña='contraseña'");
 			while(rs.next() == true) 
 			{
       		 
@@ -132,13 +135,13 @@ public class MySQLAccess
 		return retorno; 
   }
 
-  public boolean validarUsuario(String usuario, String contraseÃ±a) 
+  public boolean validarUsuario(String usuario, String contraseña) 
   {
 				
 		boolean retorno = true;
 		try 
 		{
-			ResultSet rs = stmt.executeQuery("select usuario,contraseÃ±a from apostante where usuario='usuario' and contraseÃ±a='contraseÃ±a'");
+			ResultSet rs = stmt.executeQuery("select usuario,contraseña from apostante where usuario='usuario' and contraseña='contraseña'");
 			while(rs.next() == true) 
 			{    		 
 	    		 if(rs!=null)
@@ -158,6 +161,97 @@ public class MySQLAccess
 		return retorno; 
 	}
   
+  //metodo que carga los partidos en la vista
+  public DefaultTableModel cargarPartido(String id_partido, String deporte,String equipo_local, String equipo_visit, int cuota, Date fecha,  DefaultTableModel modelo)
+	{
+		  
+      try {
+      	ResultSet rs = stmt.executeQuery("select * from partido");
+      	
+      	 while(rs.next() == true) {
+      		   		 
+      		
+      		 id_partido = rs.getString("id_partido");
+      		 deporte = rs.getString("id_deporte");
+      		 equipo_local= rs.getString("id_participante1");
+      		 equipo_visit= rs.getString("id_participante2");
+      		 cuota = rs.getInt("cantidad_cuota");
+      		 fecha= rs.getDate("fecha");   
+      		      		
+      		 
+      		  modelo.addRow( new Object[] {id_partido,deporte,equipo_local,equipo_visit,cuota,fecha} );
+      	 }    
+      	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return modelo;
+	}   
+  
+ 
+  
+  //Metodo que anade un nuevo partido
+  public void anadirPartido(int id, String deporte, String local,String visitante, int cuota, String fecha )
+	{	
+		
+		
+			try {
+				
+							
+				String sentencia="insert into partido values('"+id+"', '"+deporte+"', '"+local+"','"+visitante+"', '"+cuota+"',  '"+fecha+"')";
+				stmt.executeUpdate(sentencia);				
+								
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		
+	
+	} 
+  
+  
+//Método para eliminar un partido de la base de datos
+	public void eliminarPartido(JTable table, int fila, int columna,int columna2)
+	{
+		String partido=table.getValueAt(fila, columna).toString();
+		columna=0;
+		columna2=6;
+		try {
+			
+			String eliminado=partido;
+			
+			String sentencia="delete from partido where id_partido='"+table.getValueAt(fila,columna)+"'";
+			stmt.executeUpdate(sentencia);				
+			
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+  
+
+//Metodo que modifica un partido
+	public void modificarPartido(String id_partido, String deporte, String local,String visitante, int cuota,  String fecha,JTable table, int fila, int columna)
+	{
+		columna=0;
+		
+		
+		try {
+			String sentencia="update partido set id_partido='"+id_partido+"', id_deporte='"+deporte+"', id_participante1='"+local+"', id_participante2='"+visitante+"', cantidad_cuota='"+cuota+"', fecha='"+fecha+"' where id_partido= '"+table.getValueAt(fila,columna)+"'";			
+			stmt.executeUpdate(sentencia);
+			
+					
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
   /*
   private void writeResultSet(ResultSet resultSet) throws SQLException 
   {

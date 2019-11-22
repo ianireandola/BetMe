@@ -109,8 +109,8 @@ public class frmRegistro extends JFrame
 				
 				int id_apostante = (Integer) spinnerID.getValue();
 				
-				String contraseÃ±a = new String (pfContrasena.getPassword());
-				String contraseÃ±acon = new String (pfContrasenaCon.getPassword());
+				String contraseña = new String (pfContrasena.getPassword());
+				String contraseñacon = new String (pfContrasenaCon.getPassword());
 				
 				String usuario = txtUsuario.getText();				
 				String nombre = txtNombre.getText();
@@ -119,37 +119,37 @@ public class frmRegistro extends JFrame
 				
 				if(base.existeID(id_apostante)==true)
 				{
-					JOptionPane.showMessageDialog(null, "Â¡Ya existe un usuario con ese ID!");					
+					JOptionPane.showMessageDialog(null, "¡Ya existe un usuario con ese ID!");					
 				}
 				else if(usuario.equals("") || pfContrasena.equals("") || pfContrasenaCon.equals("") || nombre.equals("") || tarjeta_credito.equals(""))
 				{
 					if(edad < 18)
 					{
-						JOptionPane.showMessageDialog(null, " No se permite el registro a menores de 18 aÃ±os. ");
+						JOptionPane.showMessageDialog(null, " No se permite el registro a menores de 18 años. ");
 					}
 					else 
 					{
-						JOptionPane.showMessageDialog(null, "Â¡Hay campos vacios! Debe rellenar todos los campos.");
+						JOptionPane.showMessageDialog(null, "¡Hay campos vacios! Debe rellenar todos los campos.");
 					}
 					
 				}
 				else
 				{
-					if(contraseÃ±a.equals(contraseÃ±acon))
+					if(contraseña.equals(contraseñacon))
 					{
 						
 						esconder();					
 						
-						base.aÃ±adirUsuario(id_apostante, usuario, contraseÃ±a, nombre, tarjeta_credito, edad);
+						base.añadirUsuario(id_apostante, usuario, contraseña, nombre, tarjeta_credito, edad);
 						
-						JOptionPane.showMessageDialog(null, "Â¡Usuario registrado correctamente!");
+						JOptionPane.showMessageDialog(null, "¡Usuario registrado correctamente!");
 						
 						frmPrincipal home = new frmPrincipal();
 						home.setVisible(true);
 					}
 					else 
 					{
-						JOptionPane.showMessageDialog(null, "Las contraseÃ±as no coinciden");
+						JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
 					}
 				}				
 				
@@ -173,7 +173,7 @@ public class frmRegistro extends JFrame
 		lblEdad.setBounds(468, 282, 141, 32);
 		getContentPane().add(lblEdad);
 		
-		lblTarjetaDeCredito = new JLabel("NÂº T.CREDITO");
+		lblTarjetaDeCredito = new JLabel("Nº T.CREDITO");
 		lblTarjetaDeCredito.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTarjetaDeCredito.setForeground(Color.WHITE);
 		lblTarjetaDeCredito.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -210,7 +210,7 @@ public class frmRegistro extends JFrame
 		int valorEntero = (int) Math.floor(Math.random()*(N-M+1)+M);
 		spinnerID.setValue(valorEntero);
 		
-		lblContrasenaCon = new JLabel("CONFIRMAR CONTRASEÃ‘A");
+		lblContrasenaCon = new JLabel("CONFIRMAR CONTRASEÑA");
 		lblContrasenaCon.setVerticalAlignment(SwingConstants.TOP);
 		lblContrasenaCon.setForeground(Color.WHITE);
 		lblContrasenaCon.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -227,7 +227,7 @@ public class frmRegistro extends JFrame
 			public void actionPerformed(ActionEvent arg0) 
 			{				
 				String ObjButtons[] = {"Si","Cancelar"};
-		        int PromptResult = JOptionPane.showOptionDialog(null,"Â¿Deseas volver a la pÃ¡gina principal?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Deseas volver a la página principal?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 		        	esconder();
@@ -248,7 +248,7 @@ public class frmRegistro extends JFrame
 		    public void windowClosing(WindowEvent we)
 		    { 
 		        String ObjButtons[] = {"Si","Cancelar"};
-		        int PromptResult = JOptionPane.showOptionDialog(null,"Â¿Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 		            System.exit(0);

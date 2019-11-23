@@ -164,28 +164,39 @@ public class MySQLAccess
   //metodo que carga los partidos en la vista
   public DefaultTableModel cargarPartido(String id_partido, String deporte,String equipo_local, String equipo_visit, int cuota, Date fecha,  DefaultTableModel modelo)
 	{
+	 
 		  
       try {
-      	ResultSet rs = stmt.executeQuery("select * from partido");
+      	//ResultSet rs = stmt.executeQuery("select * from  partido ");
+      	ResultSet rs = stmt.executeQuery("select * from  partido INNER JOIN deporte ON partido.id_deporte=deporte.id_deporte INNER JOIN participante ON partido.id_participante1=participante.id_participante INNER JOIN participante P ON partido.id_participante2=P.id_participante ");
+      
+   
       	
-      	 while(rs.next() == true) {
-      		   		 
+      	 while(rs.next() == true) {  		
+      		   		       		
       		
-      		 id_partido = rs.getString("id_partido");
-      		 deporte = rs.getString("id_deporte");
-      		 equipo_local= rs.getString("id_participante1");
-      		 equipo_visit= rs.getString("id_participante2");
-      		 cuota = rs.getInt("cantidad_cuota");
-      		 fecha= rs.getDate("fecha");   
+      		  id_partido = rs.getString("id_partido");        		
+      		  deporte = rs.getString("nombre"); 		
+      		  equipo_local= rs.getString("participante.nombre");
+      		  equipo_visit= rs.getString("P.nombre");
+      		  cuota = rs.getInt("cantidad_cuota");
+      		  fecha= rs.getDate("fecha");   
       		      		
       		 
       		  modelo.addRow( new Object[] {id_partido,deporte,equipo_local,equipo_visit,cuota,fecha} );
-      	 }    
+      		
+      	 }       	     	   	
+      	
+      	 
       	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+      
+      	
+		
+    	
 		return modelo;
 	}   
   
@@ -220,7 +231,7 @@ public class MySQLAccess
 		columna2=6;
 		try {
 			
-			String eliminado=partido;
+			
 			
 			String sentencia="delete from partido where id_partido='"+table.getValueAt(fila,columna)+"'";
 			stmt.executeUpdate(sentencia);				
@@ -240,8 +251,21 @@ public class MySQLAccess
 		columna=0;
 		
 		
+		
+		
+		
 		try {
-			String sentencia="update partido set id_partido='"+id_partido+"', id_deporte='"+deporte+"', id_participante1='"+local+"', id_participante2='"+visitante+"', cantidad_cuota='"+cuota+"', fecha='"+fecha+"' where id_partido= '"+table.getValueAt(fila,columna)+"'";			
+			String sentencia1=stmt.executeQuery("select id_deporte from deporte where nombre='"+deporte+"'").toString();
+			
+			
+			String sentencia2=stmt.executeQuery("select id_participante from participante where nombre='"+local+"'").toString();
+		
+			String sentencia3=stmt.executeQuery("select id_participante from participante where nombre='"+visitante+"'").toString();
+			
+			ResultSet rs = stmt.executeQuery("select * from  partido INNER JOIN deporte ON partido.id_deporte=deporte.id_deporte INNER JOIN participante ON partido.id_participante1=participante.id_participante INNER JOIN participante P ON partido.id_participante2=P.id_participante ");
+		      
+			
+			String sentencia="update partido set id_partido='"+id_partido+"', id_deporte='"+sentencia1+"', id_participante1='"+sentencia2+"', id_participante2='"+sentencia3+"', cantidad_cuota='"+cuota+"', fecha='"+fecha+"' where id_partido= '"+table.getValueAt(fila,columna)+"'";			
 			stmt.executeUpdate(sentencia);
 			
 					

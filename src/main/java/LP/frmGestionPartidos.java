@@ -246,11 +246,11 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 	//Llama a la base de datos para cargar la tabla con los datos de los jugadores. 
 	void llenar()
 	{
-		String id_partido=null;
+		int id_partido=0;
 		String deporte=null;
 		String equipo_local=null;
 		String equipo_visit=null;
-		Date fecha=null;		
+		String fecha=null;		
 		int cuota=0;
 		
 		
@@ -272,7 +272,9 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 	public void guardar()
 	{
 			
-	
+		int fila=table.getSelectedRow();
+		int columna=table.getSelectedColumn();
+		
 		MySQLAccess base=new MySQLAccess();
 		
 	
@@ -291,7 +293,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 			int cuota=Integer.parseInt(textFieldCuota.getText().toString());				
 			
 			
-			base.anadirPartido(id,deporte,local,visitante,cuota,fecha);
+			base.anadirPartido(id,deporte,local,visitante,cuota,fecha, table, fila, columna);
 			
 			JOptionPane.showMessageDialog(null, "¡Partido añadido correctamente!");
 			
@@ -328,7 +330,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		int fila=table.getSelectedRow();
 		int columna=table.getSelectedColumn();
 		
-		String id_partido=textFieldID_partido.getText();	
+		int id_partido=Integer.parseInt(textFieldID_partido.getText());	
 		String deporte=textFieldDeporte.getText();
 		String local=textFieldLocal.getText();
 		String visitante=textFieldVisitante.getText();		
@@ -363,8 +365,9 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 	
 	public void habilitar()
 	{
+		textFieldID_partido.setEnabled(false);
 		textFieldDeporte.setEnabled(true);
-		textFieldLocal.requestFocus();
+		textFieldDeporte.requestFocus();
 		textFieldLocal.setEnabled(true);
 		textFieldVisitante.setEnabled(true);
 		textFieldFecha.setEnabled(true);

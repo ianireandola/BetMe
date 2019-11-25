@@ -208,7 +208,7 @@ public class MySQLAccess
   public void anadirPartido(int id, String deporte, String local,String visitante, int cuota, String fecha, JTable table, int fila, int columna)
 	{	
 
-		int id_deporte= this.obtenerID_deporte(deporte);
+		 int id_deporte= this.obtenerID_deporte(deporte);
 		 int id_local=this.obtenerID_local(local);
 		 int id_visit= this.obtenerID_visitante(visitante);
 		 DefaultTableModel modelo=null;
@@ -266,7 +266,6 @@ public class MySQLAccess
 	public void modificarPartido(int id_partido, String deporte, String local,String visitante, int cuota,  String fecha,JTable table, int fila, int columna)
 	{
 		columna=0;
-		
 		
 		int id_deporte= this.obtenerID_deporte(deporte);
 		 int id_local=this.obtenerID_local(local);
@@ -406,6 +405,115 @@ public String cargarPromocion() {
 	
 		return cantidad;
 }
+
+	//metodo que carga los deportes en la vista
+	public DefaultTableModel cargarDeporte(int id_deporte, String nombre, String descripcion, DefaultTableModel modelo)
+	{
+	 
+		  
+    try {
+    	//ResultSet rs = stmt.executeQuery("select * from  deporte ");
+    	ResultSet rs = stmt.executeQuery("select * from  deporte");
+    
+    	while(rs.next() == true) {  		
+    		   		       		
+    		id_deporte = rs.getInt("id_deporte");        		
+    		nombre = rs.getString("nombre"); 		
+    		descripcion= rs.getString("descripcion");
+    		    
+    		modelo.addRow( new Object[] {id_deporte,nombre,descripcion} );
+    		
+    	 }       	     	   	
+    	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    
+		return modelo;
+	}   
+
+	//Metodo que anade un nuevo deporte
+	public void anadirDeporte(int id_deporte, String nombre, String descripcion, JTable table, int fila, int columna)
+		{	
+
+		 DefaultTableModel modelo=null;
+		
+			try {
+				
+				String sentencia="insert into deporte values('"+id_deporte+"', '"+nombre+"','"+descripcion+"')";
+				stmt.executeUpdate(sentencia);	
+				
+				String[] columnas = {"ID_DEPORTE","NOMBRE", "DESCRIPCION"};
+				
+				modelo = new DefaultTableModel(null,columnas);		
+				table.setModel(modelo);
+				
+				MySQLAccess base=new MySQLAccess();
+				base.cargarDeporte(id_deporte,nombre,descripcion, modelo);
+						
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		
+		} 
+
+	//Método para eliminar un deporte de la base de datos
+	public void eliminarDeporte(JTable table, int fila, int columna,int columna2)
+	{
+		String deporte=table.getValueAt(fila, columna).toString();
+		columna=0;
+		columna2=6;
+		try {
+			
+			String sentencia="delete from deporte where id_deporte='"+table.getValueAt(fila,columna)+"'";
+			stmt.executeUpdate(sentencia);				
+			
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+
+		//Metodo que modifica un deporte
+		public void modificarDeporte(int id_deporte, String nombre, String descripcion,JTable table, int fila, int columna)
+		{
+			columna=0;
+			
+			
+			 int id_deportee= this.obtenerID_deporte(nombre);
+			
+		
+			 DefaultTableModel modelo=null;
+			
+			
+			try {
+									
+				
+				String sentencia="update deporte set id_deporte='"+id_deporte+"', nombre='"+ nombre +"', descripcion='"+descripcion+"' where id_deporte= '"+table.getValueAt(fila,columna)+"'";			
+				stmt.executeUpdate(sentencia);
+				
+				String[] columnas = {"NOMBRE","DESCRIPCION"};
+				
+				modelo = new DefaultTableModel(null,columnas);		
+				table.setModel(modelo);
+				
+				MySQLAccess base=new MySQLAccess();
+				base.cargarDeporte(id_deporte,nombre,descripcion, modelo);
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	
+
 
   /*
   // You need to close the resultSet

@@ -32,8 +32,6 @@ import LD.MySQLAccess;
 
 public class frmGestionPartidos extends JFrame implements ActionListener, MouseListener{
 	
-	
-	
 	private JTextField textFieldLocal;
 	private JTextField textFieldVisitante;
 	private JTextField textFieldFecha;
@@ -189,8 +187,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 			}
 			
 		});
-		
-		 
+	
 		
 		
 		setTitle("Gestion de equipo");	
@@ -300,8 +297,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 			llenar();
 			limpiar();
 		}
-		
-		
+			
 		
 	}
 	

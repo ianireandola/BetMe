@@ -66,7 +66,7 @@ public class frmAltaDeporte extends JFrame implements ActionListener
 		textArea.setBounds(42, 162, 407, 97);
 		getContentPane().add(textArea);
 		
-		btnAltaDeporte = new JButton("AÑADIR DEPORTE");
+		btnAltaDeporte = new JButton("AGREGAR DEPORTE");
 		btnAltaDeporte.setBackground(Color.WHITE);
 		btnAltaDeporte.addActionListener(new ActionListener() 
 		{

@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import java.awt.Color;
@@ -37,38 +38,35 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 		
 		
 		JTextArea txtrLosUsuariosQue = new JTextArea();
-		txtrLosUsuariosQue.setForeground(Color.WHITE);
+		txtrLosUsuariosQue.setForeground(Color.BLACK);
 		txtrLosUsuariosQue.setBounds(33, 37, 404, 47);
 		panel.add(txtrLosUsuariosQue);
 		txtrLosUsuariosQue.setFont(new Font("Arial", Font.BOLD, 14));
-		txtrLosUsuariosQue.setBackground(Color.BLACK);
+		txtrLosUsuariosQue.setBackground(SystemColor.control);
 		txtrLosUsuariosQue.setEditable(false);
 		txtrLosUsuariosQue.setText("Los usuarios que se registren por primera vez, \r\nrecibir\u00E1n como regalo la siguiente cantidad: ");
 		
 		textField = new JTextField();
-		textField.setBounds(33, 87, 86, 37);
+		textField.setBounds(33, 87, 38, 37);
 		panel.add(textField);
 		textField.setColumns(10);
 		
 		JButton btnActualizar = new JButton("ACTUALIZAR");
 		btnActualizar.setBounds(64, 188, 146, 29);
-		panel.add(btnActualizar);
+		btnActualizar.addActionListener(this);
+		btnActualizar.setActionCommand("ACTUALIZAR");
+		panel.add(btnActualizar);				
+		
 		
 		JButton btnSalir = new JButton("SALIR");
-		btnSalir.setBounds(269, 188, 115, 29);
+		btnSalir.setBounds(283, 188, 115, 29);
+		btnSalir.addActionListener(this);
+		btnSalir.setActionCommand("SALIR");
 		panel.add(btnSalir);
 		
-		JButton btnModificar = new JButton("MODIFICAR");
-		btnModificar.setBounds(365, 474, 115, 25);
-		btnModificar.addActionListener(this);
-		btnModificar.setActionCommand("MODIFICAR");
-		getContentPane().add(btnModificar);
-		
-		JButton btnEliminar = new JButton("SALIR");
-		btnEliminar.setBounds(527, 474, 97, 25);
-		btnEliminar.addActionListener(this);
-		btnEliminar.setActionCommand("SALIR");
-		getContentPane().add(btnEliminar);
+		JLabel lblEuros = new JLabel("euros");
+		lblEuros.setBounds(74, 100, 69, 20);
+		panel.add(lblEuros);
 		
 		llenar();
 	}
@@ -93,7 +91,7 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 		
 		switch(e.getActionCommand()){						
 			
-		case "MODIFICAR":
+		case "ACTUALIZAR":
 			
 			this.actualizar();
 			break;			
@@ -113,8 +111,30 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 	private void actualizar() {
 		// TODO Auto-generated method stub
 		
+		int cantidad=Integer.parseInt(textField.getText().toString());	
+		MySQLAccess base=new MySQLAccess();
+		
+		if(textField.getText().toString().isEmpty()  )
+		{
+			JOptionPane.showMessageDialog(null, "¡Rellene todos los campos");
+		}
+		
+		else{
+			
+			base.actualizarCantidad(cantidad);
+			llenar();
+	        JOptionPane.showMessageDialog(null, "Promocion modificada");
+	       // limpiar();
+		}
+	
 	}
 	
+	public void limpiar()
+	{
+		textField.setText("");
+		
+		
+	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

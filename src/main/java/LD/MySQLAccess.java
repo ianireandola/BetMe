@@ -79,12 +79,13 @@ public class MySQLAccess
   {	
 	  
 	  Connection con = null;     
+	  int cuota_promocion=getPromocion();
 	
 	  try 
 	  {
 		  con = conexion();
 		  PreparedStatement ps;
-		  String sql = "INSERT INTO apostante (id_apostante, usuario, contraseña, nombre, tarjeta_credito, edad) VALUES(?,?,?,?,?,?)";
+		  String sql = "INSERT INTO apostante (id_apostante, usuario, contraseña, nombre, tarjeta_credito, edad, saldo) VALUES(?,?,?,?,?,?,?)";
 		  	  
 		  ps = con.prepareStatement(sql);
           ps.setInt(1, id_apostante);
@@ -93,6 +94,7 @@ public class MySQLAccess
           ps.setString(4, nombre);
           ps.setString(5, tarjeta_credito);
           ps.setInt(6, edad);
+          ps.setInt(7, cuota_promocion);
           ps.executeUpdate();
           ps.close();
           System.out.println("Query executed");
@@ -108,7 +110,33 @@ public class MySQLAccess
   }  
   
   
-  public boolean validarAdmin(String usuario, String contraseña) 
+  private int getPromocion() {
+	// TODO Auto-generated method stub
+	  
+	  
+	  	ResultSet rs;
+		int cantidad=0;
+		try {
+			rs = stmt.executeQuery("select * from promocion");
+			
+					
+			 while(rs.next() == true) {  	
+			       		
+			 				  		
+		 		  cantidad= rs.getInt("cantidad");
+		 		    			 		      		 
+		 		
+		 	 }    
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		
+		return cantidad;
+}
+
+public boolean validarAdmin(String usuario, String contraseña) 
   {		
 		
 		boolean retorno = true;
@@ -510,6 +538,22 @@ public String cargarPromocion() {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+
+		public void actualizarCantidad(int cantidad) {
+			// TODO Auto-generated method stub
+					
+			try {
+				String sentencia=("update promocion set cantidad='"+cantidad+"'");	
+				stmt.executeUpdate(sentencia);
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		}
 		
 	

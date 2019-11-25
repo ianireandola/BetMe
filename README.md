@@ -10,9 +10,9 @@
 
 3. To access as Administrator: 
 
-  User: admin
-  
-  Password: admin
+    User: admin
+
+    Password: admin
 
 4.To access as User:
 

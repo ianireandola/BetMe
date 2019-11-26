@@ -20,6 +20,6 @@
 
   4.2. Access with the following credentials:
 
-    User: inigo
+    User: user
 
-    Password: inigo
+    Password: user

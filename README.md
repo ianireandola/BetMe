@@ -1,4 +1,4 @@
-# BetMe :euro:
+# :euro: BetMe :euro:
 
 **1.Update project**
 

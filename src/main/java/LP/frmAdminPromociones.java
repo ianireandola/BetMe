@@ -78,8 +78,9 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 		
 		MySQLAccess base=new MySQLAccess();
 		
-		String cantidad=base.cargarPromocion();
-		textField.setText(cantidad);
+		int cantidad=base.cargarPromocion();
+		String cantidad_cuota = cantidad + "";
+		textField.setText(cantidad_cuota);
 	}
 
 

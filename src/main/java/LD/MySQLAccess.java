@@ -412,17 +412,17 @@ private int obtenerID_deporte(String deporte)  {
 	return id_deporte;
 }
 
-public String cargarPromocion() {
+public int cargarPromocion() {
 	// TODO Auto-generated method stub
 	
-	String cantidad=null;
+	int cantidad=0;
 	
 		try {
 			ResultSet rs = stmt.executeQuery("select * from promocion");
 			while(rs.next() == true) {  	
 	       		
 			  		
-		 		 cantidad= rs.getString("cantidad");		 		    			 		      		 
+		 		 cantidad= rs.getInt("cantidad");		 		    			 		      		 
 		 		
 		 	 }   
 			

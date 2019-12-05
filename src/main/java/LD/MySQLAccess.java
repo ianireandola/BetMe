@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.junit.Test;
+
 import LN.ExcepcionDeporte;
 
 public class MySQLAccess 
@@ -106,17 +108,40 @@ public class MySQLAccess
 		  e.printStackTrace();
 	  }	
 		
-	
+	 int filas=contarUsuarios();
+	 System.out.println(filas);
   }  
   
   
-  private int getPromocion() {
+  public int contarUsuarios() {
+	// TODO Auto-generated method stub
+	  int filas=0;
+    try {
+		ResultSet rs = stmt.executeQuery("select * from apostante");
+		
+		 while(rs.next() == true) {  	
+	       		
+		  	 filas++;
+	 		    			 		      		 
+	 		
+	 	 }    
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	return filas;
+}
+
+public int getPromocion() {
 	// TODO Auto-generated method stub
 	  
-	  
+	
 	  	ResultSet rs;
 		int cantidad=0;
 		try {
+			
 			rs = stmt.executeQuery("select * from promocion");
 			
 					
@@ -134,6 +159,7 @@ public class MySQLAccess
 		}
 		
 		return cantidad;
+		
 }
 
 public boolean validarAdmin(String usuario, String contraseña) 

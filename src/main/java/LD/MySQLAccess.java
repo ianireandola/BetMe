@@ -55,12 +55,14 @@ public class MySQLAccess
 	boolean retorno = false;
 	try 
 	{
+		System.out.println("1");
 		ResultSet rs = stmt.executeQuery("select id_apostante from apostante where id_apostante = '"+id_apostante+"'");
 		
 		while(rs.next() == true) 
-		{     		 
+		{     		 System.out.println("2");
 	   		 if(rs!=null)
 	   		 {
+	   			 System.out.println("3");
 	   			 retorno=true;
 	   			
 	   		 }		
@@ -72,6 +74,7 @@ public class MySQLAccess
 		// TODO Auto-generated catch block
 		
 	}
+	
 	
 	return retorno;
 		
@@ -149,7 +152,7 @@ public int getPromocion() {
 			       		
 			 				  		
 		 		  cantidad= rs.getInt("cantidad");
-		 		    			 		      		 
+		 		   System.out.println(cantidad);			 		      		 
 		 		
 		 	 }    
 		} catch (SQLException e) {
@@ -349,7 +352,7 @@ public boolean validarAdmin(String usuario, String contraseña)
 	}
 	
 	
-  private int obtenerID_visitante(String visitante) {
+  public int obtenerID_visitante(String visitante) {
 	// TODO Auto-generated method stub
 	
 	  ResultSet rs;

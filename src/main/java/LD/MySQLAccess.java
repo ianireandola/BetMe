@@ -55,14 +55,14 @@ public class MySQLAccess
 	boolean retorno = false;
 	try 
 	{
-		System.out.println("1");
+		
 		ResultSet rs = stmt.executeQuery("select id_apostante from apostante where id_apostante = '"+id_apostante+"'");
 		
 		while(rs.next() == true) 
-		{     		 System.out.println("2");
+		{     		 
 	   		 if(rs!=null)
 	   		 {
-	   			 System.out.println("3");
+	   			 
 	   			 retorno=true;
 	   			
 	   		 }		
@@ -80,7 +80,7 @@ public class MySQLAccess
 		
   }
   
-  public void añadirUsuario(int id_apostante, String usuario, String contraseña,String nombre, String tarjeta_credito,  int edad)
+  public boolean añadirUsuario(int id_apostante, String usuario, String contraseña,String nombre, String tarjeta_credito,  int edad)
   {	
 	  
 	  Connection con = null;     
@@ -102,17 +102,19 @@ public class MySQLAccess
           ps.setInt(7, cuota_promocion);
           ps.executeUpdate();
           ps.close();
-          System.out.println("Query executed");
+        
+          return true;
 				
 	  } 
 	  catch (SQLException e) 
 	  {
 		  // TODO Auto-generated catch block
 		  e.printStackTrace();
+		  return false;
 	  }	
 		
-	 int filas=contarUsuarios();
-	 System.out.println(filas);
+	
+	
   }  
   
   
@@ -152,8 +154,7 @@ public int getPromocion() {
 			       		
 			 				  		
 		 		  cantidad= rs.getInt("cantidad");
-		 		   System.out.println(cantidad);			 		      		 
-		 		
+		 		 
 		 	 }    
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -501,19 +502,56 @@ public int cargarPromocion() {
 				String sentencia="insert into deporte values('"+id_deporte+"', '"+nombre+"','"+descripcion+"')";
 				stmt.executeUpdate(sentencia);	
 				
+				
 				String[] columnas = {"ID_DEPORTE","NOMBRE", "DESCRIPCION"};
+				
 				
 				modelo = new DefaultTableModel(null,columnas);		
 				table.setModel(modelo);
 				
+				
 				MySQLAccess base=new MySQLAccess();
 				base.cargarDeporte(id_deporte,nombre,descripcion, modelo);
+			
+				
 						
 			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}	
+				
+			}
+			
+			
+		
+		} 
+	
+	
+	//Metodo que anade un nuevo deporte test
+	public boolean nuevoDeporte(int id_deporte, String nombre, String descripcion, JTable table, int fila, int columna)
+		{	
+
+		 DefaultTableModel modelo=null;
+		
+			try {
+				
+				String sentencia="insert into deporte values('"+id_deporte+"', '"+nombre+"','"+descripcion+"')";
+				stmt.executeUpdate(sentencia);	
+				
+				
+				return true;
+			
+				
+						
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+				
+			}
+			
+			
 		
 		} 
 
@@ -563,9 +601,12 @@ public int cargarPromocion() {
 				base.cargarDeporte(id_deporte,nombre,descripcion, modelo);
 				
 				
+				
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
 			}
 		}
 
@@ -582,6 +623,75 @@ public int cargarPromocion() {
 				e.printStackTrace();
 			}
 			
+			
+		}
+
+		public int contarDeportes() {
+			// TODO Auto-generated method stub
+			
+			 int filas=0;
+			    try {
+					ResultSet rs = stmt.executeQuery("select * from deporte");
+					
+					 while(rs.next() == true) {  	
+				       		
+					  	 filas++;
+				 		    			 		      		 
+				 		
+				 	 }    
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					
+				return filas;
+			
+			
+			
+			
+		}
+
+		public boolean modificarDeporteTest(int num_deportes, String nombre, String descripcion, JTable table,	int fila, int columna) {
+			// TODO Auto-generated method stub
+			
+		
+			
+			
+			
+			
+			try {
+									
+				
+				String sentencia="update deporte set id_deporte='"+num_deportes+"', nombre='"+ nombre +"', descripcion='"+descripcion+"' where id_deporte= '"+num_deportes+"'";			
+				stmt.executeUpdate(sentencia);
+				
+				return true;
+				
+				
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+				
+			}
+			
+		}
+
+		public boolean eliminarDeporteTest(int id_deporte) {
+			// TODO Auto-generated method stub
+			
+			String sentencia="delete from deporte where id_deporte='"+id_deporte+"'";
+			try {
+				stmt.executeUpdate(sentencia);
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}	
 			
 		}
 		

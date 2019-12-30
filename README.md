@@ -18,7 +18,7 @@
 
   4.1. Register yourself
 
-  4.2. Access with the following credentials:
+  4.2. Or access with the following credentials:
 
     User: user
 

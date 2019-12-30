@@ -160,20 +160,17 @@ public class frmAdmin1 extends JFrame implements ActionListener
 	
 	private void cancelarPartido() {
 		// TODO Auto-generated method stub
-		frmCancelarPartido frame=new frmCancelarPartido();
-		frame.setVisible(true);	
+		
 	}
 
 	private void modificarPartido() {
 		// TODO Auto-generated method stub
-		frmModificarPartido frame=new frmModificarPartido();
-		frame.setVisible(true);	
+		
 	}
 
 	private void nuevoPartido() {
 		// TODO Auto-generated method stub
-		frmNuevoPartido frame=new frmNuevoPartido();
-		frame.setVisible(true);	
+		
 	}
 
 	public void principal()
@@ -187,8 +184,7 @@ public class frmAdmin1 extends JFrame implements ActionListener
 	public void nuevoDeporte()
 	{
 		
-		frmAltaDeporte frame=new frmAltaDeporte();
-		frame.setVisible(true);		
+		
 		
 	}
 	
@@ -197,8 +193,6 @@ public class frmAdmin1 extends JFrame implements ActionListener
 	public void eliminarDeporte()
 	{
 		
-		frmEliminarDeporte frame=new frmEliminarDeporte();
-		frame.setVisible(true);		
 		
 	}
 	

@@ -1,6 +1,12 @@
 package martin.router.king.betMe;
 
+import static org.junit.Assert.assertEquals;
+
+import javax.swing.JTable;
+
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 
 import LD.MySQLAccess;
 import junit.framework.Test;
@@ -10,59 +16,81 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
+public class AppTest extends TestCase
 {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+	   
+    MySQLAccess base= new MySQLAccess();
+	JTable table;
+	int fila;
+	int columna;
+	int num_deportes;
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
-    
-
-	MySQLAccess base= new MySQLAccess();
 	
-
+	/**
+	 * Establece la conexion con la base de datos antes de empezar cada test
+	 */
 	@Before
 	public void setUp() {
 		base.conexion();
+		
+		
+	}
+		
+	/**
+	 * 
+	 * Testea la creacion de un nuevo deporte
+	 */
+	public void testCrear() {
+	
+		boolean expected=true;
+		boolean resultado=base.nuevoDeporte(100, "Curley", "Deporte de hielo", table, fila, columna);
+		
+		
+		assertEquals(expected, resultado);
+	}
+		
+	/**
+	 * Testea la modificacion de un deporte
+	 */
+	public void testModificar() {
+		
+		boolean expected=true;
+		boolean resultado=base.modificarDeporteTest(100, "Curley", "Deporte de riesgo", table, num_deportes, 0);
+		
+		assertEquals(expected, resultado);
 	}
 	
 	
-
+	/**
+	 * Testea la eliminacion de un deporte
+	 * 
+	 */
+	public void testEliminar() {
 	
-	public void promocion() {
+		boolean expected=true;
+		
+		boolean resultado=base.eliminarDeporteTest(100);
+		assertEquals(expected, resultado);
+		
+	}
+	
+	/**
+	 * Testea la actualizacion de las promociones
+	 */	
+	public void testPromocion() {
 		
 		int expected=15;
-			
+				
 		int cantidad=base.getPromocion();	
 		assertEquals(expected, cantidad);
-		
-		
+			
+			
 	}
 	
-		
-	public void existeID()
+	/**
+	 * Testea si existe algun apostante con ese id
+	 */
+	public void testExisteID()
 	{
 		
 		int id_apostante=1;
@@ -72,17 +100,33 @@ public class AppTest
 		assertEquals(true, resultado);
 	}
 	
+	/**
+	 * Testea el registro de un apostante
+	 */
 	
-	
-	public void añadirUsuario()
+	public void testAnadirUsuario()
 	{
-		//int usuarios=8;
+		
+		boolean expected=true;
 		
 		int contar1=base.contarUsuarios();
-		base.añadirUsuario(2, "ander", "ander", "ander", "123245", 25);
-		int contar2=base.contarUsuarios();
+		boolean resultado=base.añadirUsuario(contar1+1, "ander", "ander", "ander", "123245", 25);
 		
-		assertEquals(contar1+1,contar2 );
+		
+		assertEquals(expected,resultado );
 	}
-	
 }
+	
+	
+	
+	
+	
+	
+
+    
+
+    
+
+	
+	
+

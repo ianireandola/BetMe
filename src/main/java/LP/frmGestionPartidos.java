@@ -347,6 +347,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 	
 	public void desabilitar()
 	{
+		textFieldID_partido.setEnabled(false);
 		textFieldDeporte.setEnabled(false);
 		textFieldLocal.setEnabled(false);
 		textFieldVisitante.setEnabled(false);
@@ -373,6 +374,8 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 	
 	public void limpiar()
 	{
+		textFieldID_partido.setText("");
+		textFieldDeporte.setText("");
 		textFieldLocal.setText("");
 		textFieldVisitante.setText("");
 		textFieldFecha.setText("");

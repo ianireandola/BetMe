@@ -47,7 +47,7 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 		getContentPane().setLayout(null);
 		setTitle("Gestion de deportes");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		setBounds(300, 100, 1006, 608);
+		setBounds(300, 100, 1070, 608);
 		
 		btnNuevo = new JButton("NUEVO");
 		btnNuevo.setBounds(50, 474, 102, 25);
@@ -114,7 +114,7 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 			 
 			};
 		
-		table_1.setBounds(495, 102, 412, 211);
+		table_1.setBounds(495, 102, 538, 211);
 		getContentPane().add(table_1);
 		
 		JLabel lblListadoDeportes = new JLabel("Listado deportes");
@@ -257,6 +257,7 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 			
 			llenar();
 			limpiar();
+			btnGuardar.setEnabled(false);
 		}
 		
 		
@@ -310,6 +311,10 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 		btnEliminar.setEnabled(false);
 		btnGuardar.setEnabled(false);
 		btnModificar.setEnabled(false);
+		textFieldID_partido.setEnabled(false);
+		textField_nombre.setEnabled(false);
+		textArea.setEnabled(false);
+		
 		
 	}
 	
@@ -325,6 +330,7 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 	
 	public void limpiar()
 	{
+		textFieldID_partido.setText("");
 		textField_nombre.setText("");
 		textArea.setText("");
 			

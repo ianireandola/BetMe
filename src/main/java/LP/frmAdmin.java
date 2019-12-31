@@ -57,7 +57,7 @@ public class frmAdmin extends javax.swing.JFrame
     	if(menu.getSelectedtitulo().equals("Salir"))
     	{
     		String ObjButtons[] = {"Si","Cancelar"};
-	        int PromptResult = JOptionPane.showOptionDialog(null,"Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+	        int PromptResult = JOptionPane.showOptionDialog(null,"¿Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 	        if(PromptResult==JOptionPane.YES_OPTION)
 	        {
 	            System.exit(0);
@@ -117,7 +117,7 @@ public class frmAdmin extends javax.swing.JFrame
 		    public void windowClosing(WindowEvent we)
 		    { 
 		        String ObjButtons[] = {"Si","Cancelar"};
-		        int PromptResult = JOptionPane.showOptionDialog(null,"Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 		            System.exit(0);
@@ -163,7 +163,7 @@ public class frmAdmin extends javax.swing.JFrame
             public void actionPerformed(java.awt.event.ActionEvent evt) 
             {
             	String ObjButtons[] = {"Si","Cancelar"};
-		        int PromptResult = JOptionPane.showOptionDialog(null,"Quieres cerrar sesion?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Quieres cerrar sesion?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 		        if(PromptResult==JOptionPane.YES_OPTION)
 		        {
 		        	frmPrincipal frm = new frmPrincipal();

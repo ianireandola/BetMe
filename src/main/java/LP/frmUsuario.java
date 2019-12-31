@@ -2,6 +2,9 @@ package LP;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JComboBox;
@@ -12,7 +15,14 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import LD.MySQLAccess;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -23,48 +33,44 @@ public class frmUsuario extends JFrame implements ActionListener
 	private JTextField txtCantidad;
 	private JTextField textField;
 	
-	private List list;
-	
 	private Label lbl_partido;
 	
 	private JLabel lblCantidad;
 	private JLabel lblCantidadAApostar;
 	private JLabel lblCantidad_1;
-	private JLabel lblNewLabel;
 	private JLabel lblFondo;
-	
-	private JComboBox comboBox;
-	private JComboBox comboBox_1;
 	
 	private JButton btnapostar;
 	
-	public frmUsuario() 
+	private JTable table=null;
+	private DefaultTableModel modelo=null;
+	private JTextField textFieldEquipo;
+	
+	int id_partido;
+	int id_apost;
+	public frmUsuario(int id) 
 	{
 		getContentPane().setForeground(Color.WHITE);
 		getContentPane().setBackground(Color.BLACK);		
 		setResizable(true);		
 		getContentPane().setLayout(null);
 		
-		createAndShowGUI();
+		createAndShowGUI(id);
 	}
 	
-	public void createAndShowGUI()
+	public void createAndShowGUI(int id)
 	{			
-		setTitle("BetMe - Modo Usuario");
-		setBounds(100, 100, 941, 457);
+		setTitle("BetMe - Apuestas");
+		setBounds(100, 100, 941, 458);
 		
 		getContentPane().createImage(100, 100);
-		
-		list = new List();
-		list.setBounds(302, 154, 272, 222);
-		getContentPane().add(list);
 		this.setLocationRelativeTo(null); 
 		
 		lbl_partido = new Label("PARTIDOS");
 		lbl_partido.setForeground(new Color(255, 215, 0));
 		lbl_partido.setFont(new Font("Tahoma", Font.BOLD, 16));		
 		lbl_partido.setBackground(Color.BLACK);
-		lbl_partido.setBounds(302, 121, 152, 27);		
+		lbl_partido.setBounds(287, 0, 152, 27);		
 		getContentPane().add(lbl_partido);
 		
 		txtCantidad = new JTextField();
@@ -72,65 +78,233 @@ public class frmUsuario extends JFrame implements ActionListener
 		txtCantidad.setEnabled(false);
 		txtCantidad.setText("\u20AC");
 		txtCantidad.setToolTipText("\u20AC");
-		txtCantidad.setBounds(672, 79, 61, 26);
+		txtCantidad.setBounds(329, 293, 61, 26);
 		getContentPane().add(txtCantidad);
 		txtCantidad.setColumns(10);
 		
 		lblCantidad = new JLabel("SALDO ACTUAL");
 		lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblCantidad.setForeground(new Color(255, 215, 0));
-		lblCantidad.setBounds(672, 46, 140, 20);
+		lblCantidad.setBounds(329, 260, 140, 20);
 		getContentPane().add(lblCantidad);
 		
 		lblCantidadAApostar = new JLabel("EQUIPO");
 		lblCantidadAApostar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblCantidadAApostar.setForeground(new Color(255, 215, 0));
-		lblCantidadAApostar.setBounds(672, 140, 82, 20);
+		lblCantidadAApostar.setBounds(493, 257, 82, 20);
 		getContentPane().add(lblCantidadAApostar);
-		
-		comboBox = new JComboBox();
-		comboBox.setBounds(672, 176, 152, 26);
-		getContentPane().add(comboBox);
 		
 		lblCantidad_1 = new JLabel("CANTIDAD");
 		lblCantidad_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblCantidad_1.setForeground(new Color(255, 215, 0));
-		lblCantidad_1.setBounds(672, 232, 105, 20);
+		lblCantidad_1.setBounds(704, 257, 105, 20);
 		getContentPane().add(lblCantidad_1);
 		
 		textField = new JTextField();
-		textField.setBounds(672, 268, 50, 26);
+		textField.setBounds(704, 293, 50, 26);
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		btnapostar = new JButton("Â¡APOSTAR!");
+		btnapostar = new JButton("APOSTAR");
 		btnapostar.setBackground(new Color(255, 215, 0));
-		btnapostar.setBounds(672, 328, 207, 44);
+		btnapostar.setBounds(411, 335, 207, 44);
 		getContentPane().add(btnapostar);
-		
-		lblNewLabel = new JLabel("DEPORTES");
-		lblNewLabel.setFont(lblNewLabel.getFont().deriveFont(lblNewLabel.getFont().getStyle() | Font.BOLD));
-		lblNewLabel.setForeground(new Color(255, 215, 0));
-		lblNewLabel.setBounds(305, 32, 115, 20);
-		getContentPane().add(lblNewLabel);
+		btnapostar.addActionListener(this);
+		btnapostar.setActionCommand("APOSTAR");
 		
 		lblFondo = new JLabel("");
 		lblFondo.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		lblFondo.setIcon(new ImageIcon(frmUsuario.class.getResource("/Image/piepagina.jpg")));
 		lblFondo.setBounds(0, 0, 272, 401);
-		getContentPane().add(lblFondo);	
+		getContentPane().add(lblFondo);
 		
-		comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(305, 65, 115, 26);
-		getContentPane().add(comboBox_1);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(287, 32, 620, 199);
+		getContentPane().add(scrollPane);
+		
+		table = new JTable(){
+			
+		
+			
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				 
+				return false; //Las celdas no son editables.
+				 
+				}
+				};
+		table.setBackground(Color.BLACK);
+		table.setForeground(Color.WHITE);
+		scrollPane.setViewportView(table);
+		
+		JButton btnSalir = new JButton("SALIR");
+		btnSalir.setBounds(694, 343, 115, 29);
+		getContentPane().add(btnSalir);
+		btnSalir.setActionCommand("SALIR");
+		btnSalir.addActionListener(new java.awt.event.ActionListener() 
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt) 
+            {
+            	String ObjButtons[] = {"Si","Cancelar"};
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Quieres cerrar sesion?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        if(PromptResult==JOptionPane.YES_OPTION)
+		        {
+		        	frmPrincipal frm = new frmPrincipal();
+	                frm.setVisible(true);
+	                frm.toFront();
+	                dispose();
+		        }                 
+            }
+        });
+		
+		textFieldEquipo = new JTextField();
+		textFieldEquipo.setBounds(493, 293, 146, 26);
+		getContentPane().add(textFieldEquipo);
+		textFieldEquipo.setColumns(10);
+		
+		
+		btnapostar.setEnabled(false);
+		llenar();
+		cargarSaldo(id);
+		id_apost=id;
+		
+		//Detecta si se elige un fila de la tabla mostrando sus correspondiente valores en los texfields. 
+				table.addMouseListener(new MouseAdapter() {
+					
+					@Override
+					public void mouseClicked(java.awt.event.MouseEvent e)
+					{
+						
+					    int row = table.rowAtPoint(e.getPoint());
+					// si uno de los campos de la BD esta vacio, dara un error y no mostrará el registro de la siguientes columnas, poner todos los campos a 0 o null por defecto
+					    
+					    //textFieldID_partido.setText(table.getValueAt(row,0 ).toString());
+					  // comboBox.set
+					   
+					   btnapostar.setEnabled(true);
+					   id_partido=(int) (table.getValueAt(row,0 ));
+					   
+						
+					}
+					
+				});
+				
+				addWindowListener(new WindowAdapter() 
+				{
+				    @Override
+				    public void windowClosing(WindowEvent we)
+				    { 
+				        String ObjButtons[] = {"Si","Cancelar"};
+				        int PromptResult = JOptionPane.showOptionDialog(null,"¿Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+				        if(PromptResult==JOptionPane.YES_OPTION)
+				        {
+				            System.exit(0);
+				        }
+				    }
+				});
+			
 	}
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		// TODO Auto-generated method stub
 		
+		
+		switch(e.getActionCommand()){
+		
+		case "APOSTAR":
+		
+		this.apostar(id_partido, id_apost);
+		break;
+		
+		case "SALIR":
+		
+		this.dispose();
+		frmPrincipal admin = new frmPrincipal();
+		admin.setVisible(true);
+		admin.toFront();
+					
+		break;
+		
+		}		
+
+		
 	}
+	
+	
+
+	public void cargarSaldo(int id)
+	{
+		
+		MySQLAccess base=new MySQLAccess();
+		int resultado=base.cargarSaldoApostante(id);
+	
+	
+		String cantidad_cuota = resultado+"";
+		txtCantidad.setText(cantidad_cuota);
+		
+			
+		
+	}
+	
+	private void apostar(int id_partido, int id_apost) {
+		// TODO Auto-generated method stub
+		
+		int saldo=Integer.parseInt(txtCantidad.getText());
+		int apuesta=Integer.parseInt(textField.getText());
+		String equipo= textFieldEquipo.getText();
+		
+		MySQLAccess base=new MySQLAccess();		
+		base.apostar(id_partido,apuesta,equipo,saldo);
+		
+		int saldo_actualizado=base.actualizarSaldo(apuesta, id_apost);
+		
+		cargarSaldo( id_apost);
+		limpiar();
+		
+		JOptionPane.showMessageDialog(null, "Apuesta realizada correctamente, tu saldo actual es: " +saldo_actualizado);
+		
+		
+		
+		
+	}
+	
+	private void limpiar() {
+		// TODO Auto-generated method stub
+		
+		
+		textField.setText("");
+		textFieldEquipo.setText("");
+		
+	}
+
+	//Llama a la base de datos para cargar la tabla con los datos de los partidos. 
+	void llenar(){
+				
+				int id_partido=0;
+				String deporte=null;
+				String equipo_local=null;
+				String equipo_visit=null;
+				String fecha=null;		
+				int cuota=0;
+				
+				
+				String[] columnas = {"PARTIDO","DEPORTE", "LOCAL", "VISITANTE", "CUOTA","FECHA" };
+				
+				modelo = new DefaultTableModel(null,columnas);		
+				table.setModel(modelo);
+				
+				MySQLAccess base=new MySQLAccess();
+				base.cargarPartido(id_partido,deporte,equipo_local,equipo_visit,cuota,fecha, modelo);
+				
+				modelo.addRow( new Object[] {id_partido,deporte,equipo_local,equipo_visit,cuota, fecha} );
+				
+				
+				
+			}
 }
+
 

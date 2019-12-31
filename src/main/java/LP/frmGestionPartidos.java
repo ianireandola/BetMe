@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -193,6 +195,21 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		setTitle("Gestion de equipo");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setBounds(300, 100, 917, 600);
+		
+		addWindowListener(new WindowAdapter() 
+		{
+		    @Override
+		    public void windowClosing(WindowEvent we)
+		    { 
+		        String ObjButtons[] = {"Si","Cancelar"};
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Seguro que deseas salir?","BetMe - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        if(PromptResult==JOptionPane.YES_OPTION)
+		        {
+		            System.exit(0);
+		        }
+		    }
+		});
+		
 	}
 
 	@Override

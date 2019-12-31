@@ -654,11 +654,7 @@ public int cargarPromocion() {
 
 		public boolean modificarDeporteTest(int num_deportes, String nombre, String descripcion, JTable table,	int fila, int columna) {
 			// TODO Auto-generated method stub
-			
-		
-			
-			
-			
+					
 			
 			try {
 									
@@ -692,6 +688,97 @@ public int cargarPromocion() {
 				e.printStackTrace();
 				return false;
 			}	
+			
+		}
+
+		public int obtenerID(String usuario2, String contraseña2) {
+			// TODO Auto-generated method stub
+			
+			int id_apostante=0;
+			
+			ResultSet rs;
+			try {
+				rs = stmt.executeQuery("select * from apostante where usuario='"+usuario2+"' && contraseña='"+contraseña2+"'");
+				 while(rs.next() == true) {  	
+			       		
+					 id_apostante = rs.getInt("id_apostante");    
+			 		    			 		      		 
+			 		
+			 	 }
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			return id_apostante;
+			
+	
+			
+			
+		}
+
+		public int cargarSaldoApostante(int id) {
+			// TODO Auto-generated method stub
+			
+			
+			int saldo_apostante=0;
+			try {
+				ResultSet rs = stmt.executeQuery("select * from apostante where id_apostante='"+id+"'");
+				while(rs.next() == true) {  	
+		       		
+					
+					 saldo_apostante = rs.getInt("saldo");  
+					 
+			 		    			 		      		 
+			 		
+			 	 }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return saldo_apostante;
+			
+			
+		}
+
+		public void apostar(int id_partido, int apuesta, String equipo, int saldo) {
+			// TODO Auto-generated method stub
+			
+			int id_apuesta=0;
+			
+			String sentencia="insert into apuesta values('"+id_apuesta+"', '"+id_partido+"','"+apuesta+"', '"+equipo+"')";
+			try {
+				stmt.executeUpdate(sentencia);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+			
+		}
+
+		public int actualizarSaldo(int apuesta, int id_apost) {
+			// TODO Auto-generated method stub
+			
+			
+			int saldo=this.cargarSaldoApostante(id_apost);
+			
+			int saldo_actualizado=saldo-apuesta;
+			
+			
+			
+			
+			String sentencia="update apostante set saldo='"+saldo_actualizado+"' where id_apostante='"+id_apost+"'";
+			try {
+				stmt.executeUpdate(sentencia);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return saldo_actualizado;
 			
 		}
 		
@@ -745,3 +832,4 @@ private void writeResultSet(ResultSet resultSet) throws SQLException
 
 
 }
+

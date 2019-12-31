@@ -182,8 +182,11 @@ public class frmPrincipal extends JFrame
 						if(base2.validarUsuario(usuario2, contraseña2)==true)
 						{
 							esconder();
+							
+							int id=base2.obtenerID(usuario2,contraseña2);
+							
 							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
-							frmUsuario adm = new frmUsuario();
+							frmUsuario adm = new frmUsuario( id);
 							adm.setVisible(true);							
 						}
 						else if(base2.validarUsuario(usuario2, contraseña2)==false)

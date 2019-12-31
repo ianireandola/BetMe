@@ -1,6 +1,7 @@
 package LP;
 
 
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,23 +39,49 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 	private JTextField textFieldVisitante;
 	private JTextField textFieldFecha;
 	private JTextField textFieldCuota;
+	
 	private JTable table=null;
+	
 	private DefaultTableModel modelo=null;
 	
 	private JButton btnNuevo=null;
 	private JButton btnGuardar=null;
 	private JButton btnModificar=null;
 	private JButton btnEliminar=null;
+	private JButton btnSalir;
+	
 	private JTextField textFieldID_partido;
 	private JTextField textFieldDeporte;
 	
+	private JLabel lblParticipante1;
+	private JLabel lblParticipante2;
+	private JLabel lblFecha;
+	private JLabel lblCuota;
+	private JLabel lblId_partido;
+	private JLabel lblDeporte_1;
+	
+	private JPanel panel;
+	
+	private JScrollPane scrollPane;
+	
+	
 
 	public frmGestionPartidos()
-	{		
+	{			
+		getContentPane().setBackground(Color.BLACK);
+		setResizable(false);
+		createAndShowGUI();
+		this.setLocationRelativeTo(null);
+	}
+	
+	public void createAndShowGUI()
+	{
+		setTitle("Gestion de equipo");	
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		setBounds(300, 100, 917, 600);
 		getContentPane().setLayout(null);
-
 		
-		JLabel lblParticipante1 = new JLabel("Participante local");
+		lblParticipante1 = new JLabel("Participante local");
 		lblParticipante1.setBounds(434, 30, 149, 16);
 		getContentPane().add(lblParticipante1);
 		
@@ -63,7 +90,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		getContentPane().add(textFieldLocal);
 		textFieldLocal.setColumns(10);
 		
-		JLabel lblParticipante2 = new JLabel("Participante visitante");
+		lblParticipante2 = new JLabel("Participante visitante");
 		lblParticipante2.setBounds(669, 30, 187, 16);
 		getContentPane().add(lblParticipante2);
 		
@@ -72,7 +99,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		getContentPane().add(textFieldVisitante);
 		textFieldVisitante.setColumns(10);
 		
-		JLabel lblFecha = new JLabel("Fecha");
+		lblFecha = new JLabel("Fecha");
 		lblFecha.setBounds(194, 111, 95, 16);
 		getContentPane().add(lblFecha);
 		
@@ -81,7 +108,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		getContentPane().add(textFieldFecha);
 		textFieldFecha.setColumns(10);
 		
-		JLabel lblCuota = new JLabel("Cuota");
+		lblCuota = new JLabel("Cuota");
 		lblCuota.setBounds(30, 111, 56, 16);
 		getContentPane().add(lblCuota);
 		
@@ -114,19 +141,19 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		btnEliminar.setActionCommand("ELIMINAR");
 		getContentPane().add(btnEliminar);
 		
-		JButton btnSalir = new JButton("SALIR");
+		btnSalir = new JButton("SALIR");
 		btnSalir.setBounds(673, 474, 97, 25);
 		btnSalir.addActionListener(this);
 		btnSalir.setActionCommand("SALIR");
 		getContentPane().add(btnSalir);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "PARTIDOS", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(24, 217, 857, 233);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 18, 845, 199);
 		panel.add(scrollPane);
 		
@@ -140,7 +167,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 				};
 		scrollPane.setViewportView(table);
 		
-		JLabel lblId_partido = new JLabel("ID Partido");
+		lblId_partido = new JLabel("ID Partido");
 		lblId_partido.setBounds(30, 30, 102, 20);
 		getContentPane().add(lblId_partido);
 		
@@ -149,7 +176,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		getContentPane().add(textFieldID_partido);
 		textFieldID_partido.setColumns(10);
 		
-		JLabel lblDeporte_1 = new JLabel("Deporte");
+		lblDeporte_1 = new JLabel("Deporte");
 		lblDeporte_1.setBounds(220, 28, 102, 20);
 		getContentPane().add(lblDeporte_1);
 		
@@ -190,11 +217,6 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 			
 		});
 	
-		
-		
-		setTitle("Gestion de equipo");	
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		setBounds(300, 100, 917, 600);
 		
 		addWindowListener(new WindowAdapter() 
 		{

@@ -41,10 +41,15 @@ public class frmUsuario extends JFrame implements ActionListener
 	private JLabel lblFondo;
 	
 	private JButton btnapostar;
+	private JButton btnSalir;
 	
 	private JTable table=null;
+	
 	private DefaultTableModel modelo=null;
+	
 	private JTextField textFieldEquipo;
+	
+	private JScrollPane scrollPane;
 	
 	int id_partido;
 	int id_apost;
@@ -119,7 +124,7 @@ public class frmUsuario extends JFrame implements ActionListener
 		lblFondo.setBounds(0, 0, 272, 401);
 		getContentPane().add(lblFondo);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(287, 32, 620, 199);
 		getContentPane().add(scrollPane);
 		
@@ -137,7 +142,7 @@ public class frmUsuario extends JFrame implements ActionListener
 		table.setForeground(Color.WHITE);
 		scrollPane.setViewportView(table);
 		
-		JButton btnSalir = new JButton("SALIR");
+		btnSalir = new JButton("SALIR");
 		btnSalir.setBounds(694, 343, 115, 29);
 		getContentPane().add(btnSalir);
 		btnSalir.setActionCommand("SALIR");
@@ -205,8 +210,6 @@ public class frmUsuario extends JFrame implements ActionListener
 			
 	}
 	
-	
-
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{

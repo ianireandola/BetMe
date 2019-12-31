@@ -1,5 +1,6 @@
 package LP;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -24,32 +25,42 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 
 
-public class frmGestionDeportes  extends JFrame implements ActionListener, MouseListener{
-	
-	
-	
+public class frmGestionDeportes  extends JFrame implements ActionListener, MouseListener
+{	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private DefaultTableModel modelo=null;
 	
 	private JButton btnNuevo=null;
 	private JButton btnGuardar=null;
 	private JButton btnModificar=null;
 	private JButton btnEliminar=null;
+	
 	private JTextField textFieldID_partido;
 	private JTextField textField_nombre;
+	
 	private JTable table_1;
+	
 	private JTextArea textArea;
 	
 
 	public frmGestionDeportes()
-	{		
+	{				
+		getContentPane().setBackground(Color.BLACK);
+		setResizable(false);
+		createAndShowGUI();
+		this.setLocationRelativeTo(null);
+	}
+	
+	public void createAndShowGUI()
+	{
+		setTitle("Gestion de deportes");
 		getContentPane().setLayout(null);
-		setTitle("Gestion de deportes");	
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setBounds(300, 100, 1070, 608);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		btnNuevo = new JButton("NUEVO");
 		btnNuevo.setBounds(50, 474, 102, 25);

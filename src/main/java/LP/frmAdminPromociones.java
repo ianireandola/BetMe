@@ -22,24 +22,43 @@ import LD.MySQLAccess;
 
 import javax.swing.JButton;
 
-public class frmAdminPromociones extends JFrame implements ActionListener, MouseListener{
+public class frmAdminPromociones extends JFrame implements ActionListener, MouseListener
+{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private JTextField textField;
-	public frmAdminPromociones() {
-		
-		
-		getContentPane().setLayout(null);
-	    this.setLocationRelativeTo(null);
+	
+	private JPanel panel;
+	
+	private JTextArea txtrLosUsuariosQue;
+	
+	private JButton btnActualizar;
+	private JButton btnSalir;
+	
+	private JLabel lblEuros;
+	
+	public frmAdminPromociones() 
+	{		
+		getContentPane().setBackground(Color.BLACK);
+		setResizable(false);
+		createAndShowGUI();
+		this.setLocationRelativeTo(null);
+	}
+	
+	public void createAndShowGUI()
+	{
 		setTitle("BetMe - Promociones");	
 		setBounds(100, 100, 581, 457);	
+		getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "PROMOCIONES", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(15, 30, 529, 233);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		
-		
-		JTextArea txtrLosUsuariosQue = new JTextArea();
+						
 		txtrLosUsuariosQue.setForeground(Color.BLACK);
 		txtrLosUsuariosQue.setBounds(33, 37, 404, 47);
 		panel.add(txtrLosUsuariosQue);
@@ -53,20 +72,20 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnActualizar = new JButton("ACTUALIZAR");
+		btnActualizar = new JButton("ACTUALIZAR");
 		btnActualizar.setBounds(64, 188, 146, 29);
 		btnActualizar.addActionListener(this);
 		btnActualizar.setActionCommand("ACTUALIZAR");
 		panel.add(btnActualizar);				
 		
 		
-		JButton btnSalir = new JButton("SALIR");
+		btnSalir = new JButton("SALIR");
 		btnSalir.setBounds(283, 188, 115, 29);
 		btnSalir.addActionListener(this);
 		btnSalir.setActionCommand("SALIR");
 		panel.add(btnSalir);
 		
-		JLabel lblEuros = new JLabel("euros");
+		lblEuros = new JLabel("euros");
 		lblEuros.setBounds(74, 100, 69, 20);
 		panel.add(lblEuros);
 		
@@ -89,7 +108,8 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 
 
 
-	private void llenar() {
+	private void llenar() 
+	{
 		// TODO Auto-generated method stub
 		
 		MySQLAccess base=new MySQLAccess();
@@ -102,7 +122,8 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) 
+	{
 		// TODO Auto-generated method stub
 		
 		
@@ -125,7 +146,8 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 		}
 	}
 
-	private void actualizar() {
+	private void actualizar() 
+	{
 		// TODO Auto-generated method stub
 		
 		int cantidad=Integer.parseInt(textField.getText().toString());	

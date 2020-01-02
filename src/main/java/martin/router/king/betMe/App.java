@@ -5,8 +5,17 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import LD.MySQLAccess;
 import LP.frmPrincipal;
 
+/**
+ * Clase para la gestion de la ejecucion de la aplicacion
+ * @author Martin Router King
+ *
+ */
 public class App 
 {
+	/**
+	 * Metodo main de la aplicacion
+	 * @param args
+	 */
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub

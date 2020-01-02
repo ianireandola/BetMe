@@ -14,7 +14,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit test for simple App.
+ * Clase para la realizacion de tests unitarios JUnit Tests
+ * @author Martin Router King
+ *
  */
 public class AppTest extends TestCase
 {
@@ -36,8 +38,7 @@ public class AppTest extends TestCase
 		
 	}
 		
-	/**
-	 * 
+	/** 
 	 * Testea la creacion de un nuevo deporte
 	 */
 	public void testCrear() {
@@ -62,8 +63,7 @@ public class AppTest extends TestCase
 	
 	
 	/**
-	 * Testea la eliminacion de un deporte
-	 * 
+	 * Testea la eliminacion de un deporte	 * 
 	 */
 	public void testEliminar() {
 	

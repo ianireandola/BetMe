@@ -20,6 +20,11 @@ import javax.swing.SwingConstants;
 import LD.MySQLAccess;
 import javax.swing.JSpinner;
 
+/**
+ * Clase para la gestion de registros
+ * @author Martin Router King
+ *
+ */
 public class frmRegistro extends JFrame 
 {	
 	private static final long serialVersionUID = 1L;		
@@ -49,6 +54,9 @@ public class frmRegistro extends JFrame
 	MySQLAccess cc = new MySQLAccess();
 	Connection con = cc.conexion();
 	
+	/**
+	 * Constructor de la clase
+	 */
 	public frmRegistro()
 	{
 		getContentPane().setBackground(Color.DARK_GRAY);
@@ -59,11 +67,17 @@ public class frmRegistro extends JFrame
 		
 	}		
 		
+	/**
+	 * Metodo para esconde la vista
+	 */
 	public void esconder()
 	{
 		this.setVisible(false);
 	}
 	
+	/**
+	 * Metodo para cargar la vista de la clase
+	 */
 	public void createAndShowGUI()
 	{		
 		setTitle("BetMe - Formulario de registro");	

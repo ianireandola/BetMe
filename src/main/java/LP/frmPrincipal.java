@@ -20,6 +20,11 @@ import javax.swing.SwingConstants;
 
 import LD.MySQLAccess;
 
+/**
+ * Clase para la generacion de la vista del menu principal
+ * @author Martin Router King
+ *
+ */
 public class frmPrincipal extends JFrame 
 {
 	
@@ -36,6 +41,9 @@ public class frmPrincipal extends JFrame
 	MySQLAccess cc = new MySQLAccess();
 	Connection con = cc.conexion();
 	
+	/**
+	 * Constructor de la clase
+	 */
 	public frmPrincipal()
 	{
 		getContentPane().setBackground(Color.BLACK);
@@ -44,9 +52,15 @@ public class frmPrincipal extends JFrame
 		this.setLocationRelativeTo(null);	
 		
 	}		
-		
+	
+	/**
+	 * Metodo para esconde la vista
+	 */
 	public void esconder(){this.setVisible(false);}
 	
+	/**
+	 * Metodo para cargar la vista de la clase
+	 */
 	public void createAndShowGUI()
 	{
 		getContentPane().setLayout(null);

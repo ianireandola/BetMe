@@ -15,10 +15,18 @@ import javax.swing.GroupLayout.Alignment;
 import org.edisoncor.gui.button.ButtonIcon;
 import org.edisoncor.gui.util.Avatar;
 
+/**
+ * Clase que construye la vista Administrador
+ * @author Martin Router King
+ *
+ */
 public class frmAdmin extends javax.swing.JFrame
 {	
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Constructor de la clase
+	 */
 	public frmAdmin() 
 	{
         initComponents();
@@ -26,6 +34,9 @@ public class frmAdmin extends javax.swing.JFrame
         llenarMenu();
     }
     
+	/**
+	 * Metodo que nos permite llenar el menu principal
+	 */
     public void llenarMenu()
     {    	
         List<Avatar> avatars=new ArrayList<Avatar>();
@@ -40,6 +51,11 @@ public class frmAdmin extends javax.swing.JFrame
     	
     }
     
+    /**
+     * Metodo para cargar imagenes
+     * @param fileName
+     * 
+     */
     public static Image loadImage(String fileName)
     {
         try 
@@ -52,6 +68,9 @@ public class frmAdmin extends javax.swing.JFrame
         }
     }
     
+    /**
+     * Metodo para llamar a cada menu
+     */
     public void llamarMenu()
     {        
     	if(menu.getSelectedtitulo().equals("Salir"))
@@ -98,7 +117,10 @@ public class frmAdmin extends javax.swing.JFrame
         }    
       
     }
-       
+    
+    /**
+     * Metodo para inicializar los componentes
+     */
     private void initComponents() 
     {
     	setTitle("BetMe - Administrador");
@@ -192,7 +214,10 @@ public class frmAdmin extends javax.swing.JFrame
     	}
     }//GEN-LAST:event_menuKeyPressed
 
-    
+    /**
+     * Metodo main
+     * @param args
+     */
     public static void main(String args[]) 
     {
         

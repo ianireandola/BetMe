@@ -26,6 +26,11 @@ import javax.swing.JTable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+/**
+ * Clase para la gestion de la vista Usuario
+ * @author Martin Router King
+ *
+ */
 public class frmUsuario extends JFrame implements ActionListener 
 {	
 	private static final long serialVersionUID = 1L;
@@ -53,6 +58,11 @@ public class frmUsuario extends JFrame implements ActionListener
 	
 	int id_partido;
 	int id_apost;
+	
+	/**
+	 * Constructor de la clase
+	 * @param id Recoge el ID del usuario que inicia sesion
+	 */
 	public frmUsuario(int id) 
 	{
 		getContentPane().setForeground(Color.WHITE);
@@ -63,6 +73,10 @@ public class frmUsuario extends JFrame implements ActionListener
 		createAndShowGUI(id);
 	}
 	
+	/**
+	 * Metodo para cargar la vista de la clase
+	 * @param id Recoge el ID del usuario que inicia sesion
+	 */
 	public void createAndShowGUI(int id)
 	{			
 		setTitle("BetMe - Apuestas");
@@ -210,6 +224,9 @@ public class frmUsuario extends JFrame implements ActionListener
 			
 	}
 	
+	/**
+	 * Metodo que responde a las acciones en la vista
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -237,8 +254,10 @@ public class frmUsuario extends JFrame implements ActionListener
 		
 	}
 	
-	
-
+	/**
+	 * Metodo para cargar el saldo del apostante
+	 * @param id Recoge el ID del usuario que inicia sesion
+	 */
 	public void cargarSaldo(int id)
 	{
 		
@@ -253,6 +272,11 @@ public class frmUsuario extends JFrame implements ActionListener
 		
 	}
 	
+	/**
+	 * Metodo para realizar una apuesta
+	 * @param id_partido Recoge el ID del partido seleccionado
+	 * @param id_apost Recoge el ID del apostante
+	 */
 	private void apostar(int id_partido, int id_apost) {
 		// TODO Auto-generated method stub
 		
@@ -275,6 +299,9 @@ public class frmUsuario extends JFrame implements ActionListener
 		
 	}
 	
+	/**
+	 * Metodo para limpiar los campos
+	 */
 	private void limpiar() {
 		// TODO Auto-generated method stub
 		
@@ -284,7 +311,10 @@ public class frmUsuario extends JFrame implements ActionListener
 		
 	}
 
-	//Llama a la base de datos para cargar la tabla con los datos de los partidos. 
+	
+	/**
+	 * Metodo que llama a la base de datos para cargar la tabla con los datos de los partidos
+	 */
 	void llenar(){
 				
 				int id_partido=0;

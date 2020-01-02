@@ -16,6 +16,11 @@ import org.junit.Test;
 
 import LN.ExcepcionDeporte;
 
+/**
+ * Clase para la realizacion de diferentes conexiones con la base de datos
+ * @author Martin Router King
+ *
+ */
 public class MySQLAccess 
 {
 	
@@ -26,6 +31,10 @@ public class MySQLAccess
   final private static String user = "MkP8exBAnI";
   final private static String passwd = "QG6pqIU1QX";
   
+  /**
+   * Método para realizar la conexion a la base de datos
+   * @return connect Devuelve la conexion a la base de datos
+   */
   public Connection conexion()
   {
     try 
@@ -50,6 +59,11 @@ public class MySQLAccess
     
   }
   
+  /**
+   * Metodo para comprobar si existe el ID
+   * @param id_apostante Recoge el ID del apostante
+   * @return retorno Devuelve TRUE si existe ID y FALSE si no existe
+   */
   public boolean existeID(int id_apostante)
   {	
 	boolean retorno = false;
@@ -80,6 +94,16 @@ public class MySQLAccess
 		
   }
   
+  /**
+   * Metodo para añadir un nuevo apostante
+   * @param id_apostante Recoge el ID del apostante
+   * @param usuario Recoge el nombre de usuario del apostante
+   * @param contraseña Recoge la contraseña del apostante
+   * @param nombre Recoge el nombre del apostante
+   * @param tarjeta_credito Recoge el numero de la tarjeta de credito del apostante
+   * @param edad Recoge la edad del apostante
+   * @return true/false dependiendo si se ha añadido correctamente o no el nuevo apostante
+   */
   public boolean añadirUsuario(int id_apostante, String usuario, String contraseña,String nombre, String tarjeta_credito,  int edad)
   {	
 	  
@@ -117,7 +141,10 @@ public class MySQLAccess
 	
   }  
   
-  
+  /**
+   * Metodo para contar los usuarios
+   * @return filas Cuenta los usuarios dados de alta actualmente
+   */
   public int contarUsuarios() {
 	// TODO Auto-generated method stub
 	  int filas=0;
@@ -137,9 +164,14 @@ public class MySQLAccess
 	}
 		
 	return filas;
-}
-
-public int getPromocion() {
+  }
+  
+  /**
+   * Metodo para sacar la cantidad de la promocion
+   * @return cantidad Devuelve la cantidad de la promocion
+   */
+  public int getPromocion() 
+  {
 	// TODO Auto-generated method stub
 	  
 	
@@ -166,7 +198,13 @@ public int getPromocion() {
 		
 }
 
-public boolean validarAdmin(String usuario, String contraseña) 
+  /**
+   * Metodo para validar al Admin
+   * @param usuario Recoge el nombre de usuario
+   * @param contraseña Recoge la contraseña
+   * @return retorno Variable booleano que devolvera TRUE si valida como Admin o FALSE si no coincide
+   */
+  public boolean validarAdmin(String usuario, String contraseña) 
   {		
 		
 		boolean retorno = true;
@@ -194,7 +232,13 @@ public boolean validarAdmin(String usuario, String contraseña)
 		
 		return retorno; 
   }
-
+  
+  /**
+   * Metodo para validar a un usuario
+   * @param usuario Recoge el nombre de usuario
+   * @param contraseña Recoge la contraseña
+   * @return retorno Variable booleano que devolvera TRUE si coincide el usuario o FALSE si no coincide
+   */
   public boolean validarUsuario(String usuario, String contraseña) 
   {
 				
@@ -221,7 +265,18 @@ public boolean validarAdmin(String usuario, String contraseña)
 		return retorno; 
 	}
   
-  //metodo que carga los partidos en la vista
+  
+  /**
+   * Método que carga los partidos en la vista
+   * @param id_partido Recoge el ID del partido
+   * @param deporte Recoge el tipo de deporte
+   * @param equipo_local Recoge el nombre del equipo local
+   * @param equipo_visit Recoge el nombre del equipo visitante
+   * @param cuota Recoge la cuota asociada a este partido
+   * @param fecha Recoge la fecha del partido
+   * @param modelo Recoge el modelo TableModel
+   * @return modelo Devuelve el DefaultTableModel cargado
+   */
   public DefaultTableModel cargarPartido(int id_partido, String deporte,String equipo_local, String equipo_visit, int cuota, String fecha,  DefaultTableModel modelo)
 	{
 	 
@@ -259,10 +314,21 @@ public boolean validarAdmin(String usuario, String contraseña)
     	
 		return modelo;
 	}   
+   
   
- 
   
-  //Metodo que anade un nuevo partido
+  /**
+   * Metodo que añade un nuevo partido
+   * @param id Recoge el ID
+   * @param deporte Recoge el tipo de partido
+   * @param local Recoge el nombre del equipo local
+   * @param visitante Recoge el nombre del equipo visitante
+   * @param cuota Recoge la cuota asociada
+   * @param fecha Recoge la fecha
+   * @param table Recoge la tabla
+   * @param fila Recoge la fila asociada
+   * @param columna Recoge la columna asociada
+   */
   public void anadirPartido(int id, String deporte, String local,String visitante, int cuota, String fecha, JTable table, int fila, int columna)
 	{	
 
@@ -297,8 +363,14 @@ public boolean validarAdmin(String usuario, String contraseña)
 	
 	} 
   
-  
-//Método para eliminar un partido de la base de datos
+
+  	/**
+  	 * Metodo para eliminar un partido de la base de datos
+  	 * @param table 
+  	 * @param fila 
+  	 * @param columna 
+  	 * @param columna2
+  	 */
 	public void eliminarPartido(JTable table, int fila, int columna,int columna2)
 	{
 		String partido=table.getValueAt(fila, columna).toString();
@@ -319,8 +391,18 @@ public boolean validarAdmin(String usuario, String contraseña)
 	}
 	
   
-
-//Metodo que modifica un partido
+	/**
+	 * Metodo que modifica un partido
+	 * @param id_partido
+	 * @param deporte
+	 * @param local
+	 * @param visitante
+	 * @param cuota
+	 * @param fecha
+	 * @param table
+	 * @param fila
+	 * @param columna
+	 */
 	public void modificarPartido(int id_partido, String deporte, String local,String visitante, int cuota,  String fecha,JTable table, int fila, int columna)
 	{
 		columna=0;
@@ -352,7 +434,11 @@ public boolean validarAdmin(String usuario, String contraseña)
 		}
 	}
 	
-	
+/**
+ * Metodo que devuelve el ID del equipo visitante
+ * @param visitante Recoge el nombre del equipo visitante
+ * @return id_visit Devuelve el ID del equipo visitante
+ */
   public int obtenerID_visitante(String visitante) {
 	// TODO Auto-generated method stub
 	
@@ -384,6 +470,11 @@ public boolean validarAdmin(String usuario, String contraseña)
 		return id_visit;
 }
 
+  /**
+   * Metodo que devuelve el ID del equipo local
+   * @param local Recoge el nombre del equipo local
+   * @return id_local Devuelve el ID del equipo local
+   */
 private int obtenerID_local(String local) {
 	// TODO Auto-generated method stub
 	  
@@ -413,7 +504,11 @@ private int obtenerID_local(String local) {
 	
 }
 
-
+/**
+ * Metodo que devuelve el ID del deporte seleccionado
+ * @param deporte Recoge el nombre del deporte seleccionado
+ * @return id_deporte Devuelve el ID del deporte seleccionado
+ */
 private int obtenerID_deporte(String deporte)  {
 	// TODO Auto-generated method stub
 	
@@ -442,6 +537,10 @@ private int obtenerID_deporte(String deporte)  {
 	return id_deporte;
 }
 
+/**
+ * Metodo para la carga de la cantidad de promocion
+ * @return cantidad Devuelve la cantidad de promocion
+ */
 public int cargarPromocion() {
 	// TODO Auto-generated method stub
 	
@@ -464,7 +563,15 @@ public int cargarPromocion() {
 		return cantidad;
 }
 
-	//metodo que carga los deportes en la vista
+	
+	/**
+	 * Metodo que carga los deportes en la vista
+	 * @param id_deporte Recoge el ID del deporte 
+	 * @param nombre Recoge el nombre del deporte
+	 * @param descripcion Recoge la descripcion del deporte
+	 * @param modelo Recoge el modelo del deporte
+	 * @return modelo Devulve el DefaultTableModel cargado con los deportes
+	 */
 	public DefaultTableModel cargarDeporte(int id_deporte, String nombre, String descripcion, DefaultTableModel modelo)
 	{
 	 
@@ -491,7 +598,16 @@ public int cargarPromocion() {
 		return modelo;
 	}   
 
-	//Metodo que anade un nuevo deporte
+	
+	/**
+	 * Metodo que añade un nuevo deporte
+	 * @param id_deporte Recoge el ID del deporte
+	 * @param nombre Recoge el nombre del deporte
+	 * @param descripcion Recoge la descripcion del deporte
+	 * @param table Recoge la tabla del deporte
+	 * @param fila Recoge la fila
+	 * @param columna Recoge la columna
+	 */
 	public void anadirDeporte(int id_deporte, String nombre, String descripcion, JTable table, int fila, int columna)
 		{	
 
@@ -524,10 +640,19 @@ public int cargarPromocion() {
 			
 			
 		
-		} 
+		} 	
 	
 	
-	//Metodo que anade un nuevo deporte test
+	/**
+	 * Metodo que añade un nuevo deporte test
+	 * @param id_deporte Recoge el ID del nuevo deporte
+	 * @param nombre Recoge el nombre del deporte
+	 * @param descripcion Recoge la descripcion del deporte
+	 * @param table Recoge la tabla del deporte
+	 * @param fila Recoge la fila
+	 * @param columna Recoge la columna
+	 * @return true/false Devuelve TRUE o FALSE dependiendo si se ha podido añadir un nuevo deporte o no
+	 */
 	public boolean nuevoDeporte(int id_deporte, String nombre, String descripcion, JTable table, int fila, int columna)
 		{	
 
@@ -555,7 +680,14 @@ public int cargarPromocion() {
 		
 		} 
 
-	//Método para eliminar un deporte de la base de datos
+	
+	/**
+	 * Metodo para eliminar un deporte de la base de datos
+	 * @param table 
+	 * @param fila 
+	 * @param columna
+	 * @param columna2
+	 */
 	public void eliminarDeporte(JTable table, int fila, int columna,int columna2)
 	{
 		String deporte=table.getValueAt(fila, columna).toString();
@@ -574,7 +706,16 @@ public int cargarPromocion() {
 	}
 	
 
-		//Metodo que modifica un deporte
+		
+		/**
+		 * Metodo para modificar un deporte
+		 * @param id_deporte
+		 * @param nombre
+		 * @param descripcion
+		 * @param table
+		 * @param fila
+		 * @param columna
+		 */
 		public void modificarDeporte(int id_deporte, String nombre, String descripcion,JTable table, int fila, int columna)
 		{
 			columna=0;
@@ -610,6 +751,10 @@ public int cargarPromocion() {
 			}
 		}
 
+		/**
+		 * Metodo que actuliaza la cantidad de la promocion
+		 * @param cantidad Recoge la cantidad de promocion
+		 */
 		public void actualizarCantidad(int cantidad) {
 			// TODO Auto-generated method stub
 					
@@ -626,6 +771,10 @@ public int cargarPromocion() {
 			
 		}
 
+		/**
+		 * Metodo para contar los deportes 
+		 * @return filas Devuelve el numero de deportes añadidos
+		 */
 		public int contarDeportes() {
 			// TODO Auto-generated method stub
 			
@@ -651,7 +800,17 @@ public int cargarPromocion() {
 			
 			
 		}
-
+		
+		/**
+		 * Metodo para modificar Deportes Test
+		 * @param num_deportes
+		 * @param nombre
+		 * @param descripcion
+		 * @param table
+		 * @param fila
+		 * @param columna
+		 * @return true/false Devolvera TRUE o FALSE si el test sale correctamente o no
+		 */
 		public boolean modificarDeporteTest(int num_deportes, String nombre, String descripcion, JTable table,	int fila, int columna) {
 			// TODO Auto-generated method stub
 					
@@ -675,7 +834,12 @@ public int cargarPromocion() {
 			}
 			
 		}
-
+		
+		/**
+		 * Metodo para eliminar Deportes Test
+		 * @param id_deporte Recoge el ID del deporte seleccionado
+		 * @return true/false Devolvera TRUE o FALSE dependiendo si el test sale correctamente o no
+		 */
 		public boolean eliminarDeporteTest(int id_deporte) {
 			// TODO Auto-generated method stub
 			
@@ -690,7 +854,13 @@ public int cargarPromocion() {
 			}	
 			
 		}
-
+		
+		/**
+		 * Metodo para obtener el ID de un apostante
+		 * @param usuario2 Recoge el nombre de usuario del apostante
+		 * @param contraseña2 Recoge la contraseña del apostante
+		 * @return id_apostante Devuelve en ID del apostante
+		 */
 		public int obtenerID(String usuario2, String contraseña2) {
 			// TODO Auto-generated method stub
 			
@@ -718,7 +888,12 @@ public int cargarPromocion() {
 			
 			
 		}
-
+		
+		/**
+		 * Metodo que carga el saldo del apostante
+		 * @param id Recoge el ID del apostante seleccionado
+		 * @return saldo_apostante Devuelve el saldo del apostante
+		 */
 		public int cargarSaldoApostante(int id) {
 			// TODO Auto-generated method stub
 			
@@ -743,7 +918,14 @@ public int cargarPromocion() {
 			
 			
 		}
-
+		
+		/**
+		 * Metodo para realizar una apuesta
+		 * @param id_partido
+		 * @param apuesta
+		 * @param equipo
+		 * @param saldo
+		 */
 		public void apostar(int id_partido, int apuesta, String equipo, int saldo) {
 			// TODO Auto-generated method stub
 			
@@ -758,7 +940,13 @@ public int cargarPromocion() {
 			}	
 			
 		}
-
+		
+		/**
+		 * Metodo para actualizar el saldo de un apostante
+		 * @param apuesta
+		 * @param id_apost
+		 * @return saldo_actualizado Devuelve el saldo actualizado del apostante
+		 */
 		public int actualizarSaldo(int apuesta, int id_apost) {
 			// TODO Auto-generated method stub
 			

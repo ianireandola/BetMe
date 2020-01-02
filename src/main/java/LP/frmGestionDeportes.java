@@ -24,7 +24,11 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 
-
+/**
+ * Clase para la gestion de deportes
+ * @author Martin Router King
+ *
+ */
 public class frmGestionDeportes  extends JFrame implements ActionListener, MouseListener
 {	
 	/**
@@ -46,7 +50,9 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 	
 	private JTextArea textArea;
 	
-
+	/**
+	 * Constructor de la clase
+	 */
 	public frmGestionDeportes()
 	{				
 		getContentPane().setBackground(Color.BLACK);
@@ -55,6 +61,9 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 		this.setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * Metodo para cargar la vista de la clase
+	 */
 	public void createAndShowGUI()
 	{
 		setTitle("Gestion de deportes");
@@ -192,6 +201,9 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 	
 	}
 
+	/**
+	 * Metodo que responde a las acciones en la vista
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -236,8 +248,9 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 	}
 
 
-	
-	//Llama a la base de datos para cargar la tabla con los datos de los jugadores. 
+	/**
+	 * Metodo que llama a la base de datos para cargar la tabla con los datos de los jugadores
+	 */
 	void llenar()
 	{
 		int id_deporte=0;
@@ -255,10 +268,13 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 		modelo.addRow( new Object[] {id_deporte,nombre,descripcion} );
 		
 	}
-
 	
 	
-	//Metodo que guarda un nuevo deporte
+	/**
+	 * Metodo para guardar un nuevo deporte
+	 * @param fila Recoge la fila seleccionada
+	 * @param columna Recoge la columna seleccionada
+	 */
 	public void guardar()
 	{
 			
@@ -292,7 +308,9 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 	}
 	
 	
-	//Metodo que eliminar el deporte seleccionado de la tabla
+	/**
+	 * Metodo que elimina el deporte seleccionado de la tabla
+	 */
 	public void eliminar()
 	{
 		int fila=table_1.getSelectedRow();
@@ -308,8 +326,9 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 	}
 	
 	
-	
-	//Metodo que modifica y guarda el jugador seleccionado con los nuevos valores
+	/**
+	 * Metodo que modifica y guarda el jugador seleccionado con los nuevos valores
+	 */
 	public void modificar()
 	{
 		
@@ -332,7 +351,9 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 		
 	}
 	
-	
+	/**
+	 * Metodo que deshabilita los elementos de la vista
+	 */
 	public void desabilitar()
 	{
 		btnEliminar.setEnabled(false);
@@ -345,7 +366,9 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 		
 	}
 	
-	
+	/**
+	 * Metodo que habilita los elementos de la vista
+	 */
 	public void habilitar()
 	{
 		textFieldID_partido.setEnabled(false);
@@ -355,6 +378,9 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 		
 	}
 	
+	/**
+	 * Metodo que limpia los campos
+	 */
 	public void limpiar()
 	{
 		textFieldID_partido.setText("");

@@ -32,7 +32,11 @@ import org.w3c.dom.events.MouseEvent;
 
 import LD.MySQLAccess;
 
-
+/**
+ * Clase para la gestion de partidos
+ * @author Martin Router King
+ *
+ */
 public class frmGestionPartidos extends JFrame implements ActionListener, MouseListener{
 	
 	private JTextField textFieldLocal;
@@ -65,7 +69,9 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 	private JScrollPane scrollPane;
 	
 	
-
+	/**
+	 * Constructor de la clase
+	 */
 	public frmGestionPartidos()
 	{			
 		getContentPane().setBackground(Color.BLACK);
@@ -74,6 +80,9 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		this.setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * Metodo para cargar la vista de la clase
+	 */
 	public void createAndShowGUI()
 	{
 		setTitle("Gestion de equipo");	
@@ -234,6 +243,9 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		
 	}
 
+	/**
+	 * Metodo que responde a las acciones en la vista
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -276,10 +288,11 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 			break;
 		}
 	}
-
-
 	
-	//Llama a la base de datos para cargar la tabla con los datos de los jugadores. 
+	 
+	/**
+	 * Metodo que llama a la base de datos para cargar la tabla con los datos de los jugadores
+	 */
 	void llenar()
 	{
 		int id_partido=0;
@@ -303,8 +316,9 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 	}
 
 	
-	
-	//Metodo que guarda un nuevo partido
+	/**
+	 * Metodo que guarda un nuevo partido	 * 
+	 */
 	public void guardar()
 	{
 			
@@ -338,10 +352,11 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		}
 			
 		
-	}
+	}	
 	
-	
-	//Metodo que eliminar el partido seleccionado de la tabla
+	/**
+	 * Metodo que elimina el partido seleccionado de la tabla
+	 */
 	public void eliminar()
 	{
 		int fila=table.getSelectedRow();
@@ -354,11 +369,12 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 	        JOptionPane.showMessageDialog(null, "Partido eliminado");
 	        limpiar();
 	   
-	}
+	}	
 	
 	
-	
-	//Metodo que modifica y guarda el jugador seleccionado con los nuevos valores
+	/**
+	 * Metodo que moficia y guarda el jugador seleccionado con los nuevos valores
+	 */
 	public void modificar()
 	{
 		
@@ -383,7 +399,9 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		
 	}
 	
-	
+	/**
+	 * Metodo que deshabilita los elementos de la vista
+	 */
 	public void desabilitar()
 	{
 		textFieldID_partido.setEnabled(false);
@@ -398,7 +416,9 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		
 	}
 	
-	
+	/**
+	 * Metodo que habilita los elementos de la vista
+	 */
 	public void habilitar()
 	{
 		textFieldID_partido.setEnabled(false);
@@ -411,6 +431,9 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 		
 	}
 	
+	/**
+	 * Metodo que limpia los campos
+	 */
 	public void limpiar()
 	{
 		textFieldID_partido.setText("");

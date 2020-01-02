@@ -22,6 +22,11 @@ import LD.MySQLAccess;
 
 import javax.swing.JButton;
 
+/**
+ * Clase para la gestión de promociones
+ * @author Martin Router King
+ *
+ */
 public class frmAdminPromociones extends JFrame implements ActionListener, MouseListener
 {
 	/**
@@ -40,6 +45,9 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 	
 	private JLabel lblEuros;
 	
+	/**
+	 * Constructor de la clase
+	 */
 	public frmAdminPromociones() 
 	{		
 		getContentPane().setBackground(Color.BLACK);
@@ -48,6 +56,9 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 		this.setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * Metodo para cargar la vista
+	 */
 	public void createAndShowGUI()
 	{
 		setTitle("BetMe - Promociones");	
@@ -107,7 +118,9 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 	}
 
 
-
+	/**
+	 * Metodo que nos permite llenar la vista con datos de la BBDD
+	 */
 	private void llenar() 
 	{
 		// TODO Auto-generated method stub
@@ -120,7 +133,9 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 	}
 
 
-
+	/**
+	 * Metodo que responde a las acciones en la vista
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -145,7 +160,10 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 			break;
 		}
 	}
-
+	
+	/**
+	 * Metodo para actualizar los campos
+	 */
 	private void actualizar() 
 	{
 		// TODO Auto-generated method stub
@@ -168,6 +186,9 @@ public class frmAdminPromociones extends JFrame implements ActionListener, Mouse
 	
 	}
 	
+	/**
+	 * Metodo para limpiar los campos
+	 */
 	public void limpiar()
 	{
 		textField.setText("");

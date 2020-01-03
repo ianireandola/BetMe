@@ -55,7 +55,7 @@ public class frmGestionDeportes  extends JFrame implements ActionListener, Mouse
 	 */
 	public frmGestionDeportes()
 	{				
-		getContentPane().setBackground(Color.BLACK);
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setResizable(false);
 		createAndShowGUI();
 		this.setLocationRelativeTo(null);

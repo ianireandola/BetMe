@@ -32,12 +32,18 @@
     	<artifactId>mysql-connector-java</artifactId>
     	<version>8.0.18</version>
     </dependency>
-    
     <dependency>
     	<groupId>org.swinglabs</groupId>
     	<artifactId>swingX</artifactId>
     	<version>1.6.1</version>
     </dependency>
+ 	<dependency>
+    	<groupId>org.apache.maven.plugins</groupId>
+    	<artifactId>maven-javadoc-plugin</artifactId>
+    	<version>3.1.1</version>
+	</dependency>
+ 
+    
     
   </dependencies>
   
@@ -59,9 +65,40 @@
 				<groupId>martin.router.king</groupId>
 				<artifactId>betMe</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
-			</plugin>
+			</plugin>	
+			
+			<plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.2</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>prepare-agent</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>report</id>
+            <phase>prepare-package</phase>
+            <goals>
+                <goal>report</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
 		</plugins>
 	  </build>
+	  
+	  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.1</version>
+      </plugin>
+    </plugins>
+  </reporting>
+	
 </project>
 
 

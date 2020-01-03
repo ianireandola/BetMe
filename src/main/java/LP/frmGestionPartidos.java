@@ -74,7 +74,7 @@ public class frmGestionPartidos extends JFrame implements ActionListener, MouseL
 	 */
 	public frmGestionPartidos()
 	{			
-		getContentPane().setBackground(Color.BLACK);
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setResizable(false);
 		createAndShowGUI();
 		this.setLocationRelativeTo(null);

@@ -273,32 +273,82 @@ public class frmUsuario extends JFrame implements ActionListener
 	}
 	
 	/**
-	 * Metodo para realizar una apuesta
+	 * Metodo para realizar una apuesta, donde previamente se validan si todos los campos han sido rellenados, el saldo y la validacion del equipo apostante
 	 * @param id_partido Recoge el ID del partido seleccionado
 	 * @param id_apost Recoge el ID del apostante
 	 */
 	private void apostar(int id_partido, int id_apost) {
 		// TODO Auto-generated method stub
 		
+		int apuesta=0;
 		int saldo=Integer.parseInt(txtCantidad.getText());
-		int apuesta=Integer.parseInt(textField.getText());
+		
+		if(textField.getText().isEmpty())
+			{
+					JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+			}
+		
+		else
+		{
+			apuesta=Integer.parseInt(textField.getText());
+		}
+		
 		String equipo= textFieldEquipo.getText();
 		
-		MySQLAccess base=new MySQLAccess();		
-		base.apostar(id_partido,apuesta,equipo,saldo);
+	
 		
-		int saldo_actualizado=base.actualizarSaldo(apuesta, id_apost);
+		if(apuesta>saldo)
+		{
+			JOptionPane.showMessageDialog(null, "No se dispone de saldo sufiente");
+			
+		}
 		
-		cargarSaldo( id_apost);
-		limpiar();
+		else if(apuesta==0)
+		{
+			JOptionPane.showMessageDialog(null, "La cantidad apostada debe ser superior a 0 ");
+		}
 		
-		JOptionPane.showMessageDialog(null, "Apuesta realizada correctamente, tu saldo actual es: " +saldo_actualizado);
+		else if(textFieldEquipo.getText().isEmpty() ) 
+		{
+			JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+		}
+		
+		else if(apuesta<=saldo )
+		{
+			MySQLAccess base=new MySQLAccess();		
+			
+			boolean correcto=base.validarEquipo(id_partido,equipo);
+			
+			
+			
+			
+			if(correcto==true)
+			{
+				base.apostar(id_partido,apuesta,equipo,saldo);
+				int saldo_actualizado=base.actualizarSaldo(apuesta, id_apost);
+				
+				cargarSaldo( id_apost);
+				limpiar();
+				
+				JOptionPane.showMessageDialog(null, "Apuesta realizada correctamente, tu saldo actual es: " +saldo_actualizado);
+				
+			}
+			
+			else
+			{
+				JOptionPane.showMessageDialog(null, "No existe ningun participante con ese nombre");
+			}
+			
+		}
+		
 		
 		
 		
 		
 	}
 	
+
+
 	/**
 	 * Metodo para limpiar los campos
 	 */

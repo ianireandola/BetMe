@@ -452,7 +452,7 @@ public class MySQLAccess
 			       		
 			 				  		
 		 		  id_visit= rs.getInt("id_participante");
-		 		  System.out.println(id_visit);
+		 		  
 		 		
 		 	   			 		      		 
 		 		
@@ -479,6 +479,7 @@ private int obtenerID_local(String local) {
 	// TODO Auto-generated method stub
 	  
 	  ResultSet rs;
+	  
 		int id_local=0;
 		try {
 			rs = stmt.executeQuery("select * from participante where nombre='"+local+"'");		
@@ -488,7 +489,8 @@ private int obtenerID_local(String local) {
 			       		
 			 				  		
 		 		  id_local= rs.getInt("id_participante");
-		 		  System.out.println(id_local);
+		 		 
+		 		  
 		 		
 		 	   			 		      		 
 		 		
@@ -524,8 +526,7 @@ private int obtenerID_deporte(String deporte)  {
 		       		
 		 				  		
 	 		  id_deporte= rs.getInt("id_deporte");
-	 		  System.out.println(id_deporte);    			 		      		 
-	 		
+	 		  
 	 	 }    
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -926,18 +927,21 @@ public int cargarPromocion() {
 		 * @param equipo
 		 * @param saldo
 		 */
-		public void apostar(int id_partido, int apuesta, String equipo, int saldo) {
+		public boolean apostar(int id_partido, int apuesta, String equipo, int saldo) {
 			// TODO Auto-generated method stub
 			
+			boolean resultado=false;
 			int id_apuesta=0;
 			
 			String sentencia="insert into apuesta values('"+id_apuesta+"', '"+id_partido+"','"+apuesta+"', '"+equipo+"')";
 			try {
 				stmt.executeUpdate(sentencia);
+				resultado=true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}	
+			}
+			return resultado;	
 			
 		}
 		
@@ -967,6 +971,55 @@ public int cargarPromocion() {
 			}
 			
 			return saldo_actualizado;
+			
+		}
+		
+		/**
+		 * Metodo para validar que el nombre del apostante introducido es correcto
+		 * @param equipo
+		 * @param id_partido
+		 * @return resultado Devuelve un true si existe el equipo, en caso contrario devolvera un false
+		 */
+
+		public boolean validarEquipo(int id_partido,String equipo) {
+			// TODO Auto-generated method stub
+			
+			
+			
+			int id_equipo=obtenerID_local(equipo);
+			
+			if(id_equipo==0)
+			{
+				return false;
+			}
+			
+			
+			boolean retorno = true;
+			try 
+			{
+				ResultSet rs = stmt.executeQuery("select * from partido where id_partido='id_partido' and id_participante1='id_equipo' or id_participante2='id_equipo'" );
+				while(rs.next() == true) 
+				{    		 
+		    		 if(rs!=null)
+		    		 {
+		    			 retorno=true;
+		    		 }	
+		    		 
+		    		
+		    		
+				}
+	    	 
+	    	
+			} 
+			catch (SQLException e) 
+			{
+				retorno=false;
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return retorno;
+			
 			
 		}
 		

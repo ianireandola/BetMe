@@ -115,6 +115,31 @@ public class AppTest extends TestCase
 		
 		assertEquals(expected,resultado );
 	}
+	/**
+	 * Testea que el que el partido y el equipo seleccionado para apostar introducidos existen
+	 */
+	
+	public void testValidarEquipo()
+	{
+		boolean expected=true;
+		
+		boolean resultado= base.validarEquipo(16, "Baskonia");		
+		assertEquals(expected,resultado);
+	}
+	
+	/**
+	 * Testea que la apuesta se registra correctamente
+	 */
+	
+	public void testApuesta()
+	{
+		boolean expected=true;
+		
+		boolean resultado= base.apostar(16, 10, "Baskonia", 10);
+		
+		assertEquals(expected,resultado);
+		
+	}
 }
 	
 	
